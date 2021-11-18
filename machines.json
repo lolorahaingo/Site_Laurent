@@ -1,0 +1,1 @@
+[{"name":"led1","type":"out","pin":"9","state":"off"},{"name":"led2","type":"out","pin":"10","state":"off"},{"name":"relay1","type":"out","pin":"4","state":"on"},{"name":"relay2","type":"out","pin":"7","state":"on"}]
