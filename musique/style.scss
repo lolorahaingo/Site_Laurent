@@ -1,0 +1,135 @@
+/**
+ * @Author: rahaingomanana <laurent>
+ * @Date:   2019-10-19T23:54:21+02:00
+ * @Email:  laurent.rahaingomanana@estaca.eu
+ * @Filename: style.css
+// @Last modified by:   laurent
+// @Last modified time: 2020-08-28T17:04:49+02:00
+ */
+
+ body, html {
+   width:100%;
+   font-family: 'Amiko', sans-serif;
+   color: black;
+ }
+ body {
+    position: relative;
+    line-height:1.5em;
+    // text-align: center;
+ }
+ @import url('https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap');
+ * {
+   box-sizing: border-box;
+   list-style-type: none;
+   text-decoration: none;
+   color: black;
+   margin:0;
+   padding:0;
+ }
+
+ nav {
+     background-color: white;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-around;
+    font-family: 'Barlow', sans-serif;
+    letter-spacing: .03em;
+    width: 100%;
+    padding-bottom: 1.7em;
+    padding-top: 1.5em;
+    font-size: 1.4em;
+ }
+ nav > a {
+     border: .5mm solid #AF62CC;
+     border-radius: .15em;
+     padding: 0.4em 2em 0.4em 2em;
+ }
+ nav ul {
+    width: 70vw;
+    padding-left: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.bgnd
+{
+    position: fixed;
+    object-fit: cover;
+    width: 100%;
+    z-index: -3;
+    filter: opacity(10%);
+}
+@media screen and (max-width: 960px)
+{
+ nav {
+    display: none;
+ }
+
+}
+
+.text
+{
+    font-size: 1.15em;
+    padding: 2em 4em 2em 4em;
+    text-align: justify;
+}
+.text p
+{
+    text-indent: 4em;
+    padding-bottom: .5em;
+    padding-top: .5em;
+}
+.text h4
+{
+    padding-bottom: 1em;
+    font-size: 1.3em;
+}
+// #creation_site img
+// {
+//     width: 45vw;
+// }
+// #premieres_exp img
+// {
+//     height: 50vh;
+// }
+// #creation_site, #premieres_exp
+// {
+//     text-align: center;
+// }
+
+
+
+footer {
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    border-top: .2mm solid grey;
+    margin-top: 25vw;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+footer .socials {
+    height: 5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 9em;
+    padding-right: 9em;
+}
+footer .title {
+    text-align: center;
+    padding-bottom: 3em;
+}
+footer img {
+    height: 3.5em;
+}
+footer #bottom {
+    margin-top: 1em;
+    border-top: .8mm solid black;
+    text-align: center;
+    padding-top: .8em;
+    padding-bottom: 1em;
+}
+iframe {
+    width: 100%;
+    min-height: 100vh;
+}
