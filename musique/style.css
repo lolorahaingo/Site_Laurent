@@ -15,7 +15,7 @@
  body {
     position: relative;
     line-height:1.5em;
-    // text-align: center;
+    /* text-align: center; */
  }
  @import url('https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap');
  * {
@@ -84,7 +84,7 @@
     padding-bottom: 1em;
     font-size: 1.3em;
 }
-// #creation_site img
+/* // #creation_site img
 // {
 //     width: 45vw;
 // }
@@ -95,7 +95,7 @@
 // #creation_site, #premieres_exp
 // {
 //     text-align: center;
-// }
+// } */
 
 
 
