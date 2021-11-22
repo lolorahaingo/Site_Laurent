@@ -9,7 +9,7 @@
 @import url("https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap");
 body, html {
   width: 100%;
-  font-family: 'Amiko', sans-serif;
+  font-family: "Amiko", sans-serif;
   color: black;
   scroll-behavior: smooth;
 }
@@ -33,8 +33,8 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-family: 'Barlow', sans-serif;
-  letter-spacing: .03em;
+  font-family: "Barlow", sans-serif;
+  letter-spacing: 0.03em;
   width: 100%;
   padding-bottom: 1.7em;
   padding-top: 1.5em;
@@ -42,8 +42,8 @@ nav {
 }
 
 nav > a {
-  border: .5mm solid #AF62CC;
-  border-radius: .15em;
+  border: 0.5mm solid #AF62CC;
+  border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
 
@@ -68,7 +68,6 @@ nav ul {
     display: none;
   }
 }
-
 #presentation {
   position: relative;
   margin-bottom: 18vw;
@@ -107,8 +106,8 @@ nav ul {
 #presentation .text a {
   color: white;
   font-size: 1.7em;
-  border: .5mm solid white;
-  border-radius: .15em;
+  border: 0.5mm solid white;
+  border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
 
@@ -123,11 +122,11 @@ nav ul {
   #presentation .text h4 {
     font-size: 3.5em;
   }
+
   #presentation .text p {
     font-size: 1.3em;
   }
 }
-
 .section {
   text-align: justify;
   margin-bottom: 10vw;
@@ -148,7 +147,7 @@ nav ul {
 
 .section .img .text a {
   font-size: 1.7em;
-  border-radius: .15em;
+  border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
 
@@ -164,7 +163,7 @@ nav ul {
 }
 
 .section .img:hover img {
-  transition: .2s;
+  transition: 0.2s;
   filter: none;
 }
 
@@ -183,20 +182,20 @@ nav ul {
 .section > .text p::first-letter {
   float: left;
   font-size: 4em;
-  padding: 0 .1em .1em 0;
+  padding: 0 0.1em 0.1em 0;
 }
 
-#domotique > .text p::first-letter {
+#experience > .text p::first-letter {
   color: #AF62CC;
 }
 
-#domotique .img .text a {
-  border: .5mm solid #AF62CC;
+#experience .img .text a {
+  border: 0.5mm solid #AF62CC;
 }
 
-#domotique .img .text:hover a {
+#experience .img .text:hover a {
   background-color: #AF62CC;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 #projets > .text p::first-letter {
@@ -204,12 +203,12 @@ nav ul {
 }
 
 #projets .img .text a {
-  border: .5mm solid #32662f;
+  border: 0.5mm solid #32662f;
 }
 
 #projets .img .text:hover a {
   background-color: #32662f;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 #musique > .text p::first-letter {
@@ -217,51 +216,57 @@ nav ul {
 }
 
 #musique .img .text a {
-  border: .5mm solid #B39556;
+  border: 0.5mm solid #B39556;
 }
 
 #musique .img .text:hover a {
   background-color: #B39556;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 960px) {
   .section > .text {
     display: none;
   }
+
   .section .img img {
     margin: 0;
     width: 100vw;
     height: auto;
     filter: none;
   }
+
   .section .img .text {
     margin-top: 1em;
     margin-bottom: 2em;
     position: relative;
   }
+
   .section .img .text * {
     color: black;
   }
+
   .section .img .text p {
     font-size: 1.3em;
   }
-  #domotique .img .text p {
+
+  #experience .img .text p {
     color: #AF62CC;
   }
+
   #projets .img .text p {
     color: #32662f;
   }
+
   #musique .img .text p {
     color: #B39556;
   }
 }
-
 footer {
   padding-top: 3em;
   display: flex;
   flex-direction: column;
-  border-top: .2mm solid grey;
+  border-top: 0.2mm solid grey;
   margin-top: 25vw;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -286,8 +291,10 @@ footer img {
 
 footer #bottom {
   margin-top: 1em;
-  border-top: .8mm solid black;
+  border-top: 0.8mm solid black;
   text-align: center;
-  padding-top: .8em;
+  padding-top: 0.8em;
   padding-bottom: 1em;
 }
+
+/*# sourceMappingURL=style.css.map */

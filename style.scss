@@ -171,13 +171,13 @@
     padding: 0 .1em .1em 0;
 }
 
-#domotique > .text p::first-letter {
+#experience > .text p::first-letter {
     color: #AF62CC;
 }
-#domotique .img .text a {
+#experience .img .text a {
     border: .5mm solid #AF62CC;
 }
-#domotique .img .text:hover a {
+#experience .img .text:hover a {
     background-color: #AF62CC;
     opacity: .9;
 }
@@ -224,7 +224,7 @@
     .section .img .text p {
         font-size: 1.3em;
     }
-    #domotique .img .text p {
+    #experience .img .text p {
         color: #AF62CC;
     }
     #projets .img .text p {
