@@ -4,149 +4,269 @@
  * @Email:  laurent.rahaingomanana@estaca.eu
  * @Filename: style.css
 // @Last modified by:   laurent
-// @Last modified time: 2020-08-28T19:42:04+02:00
+// @Last modified time: 2021-10-05T20:30:16+02:00
  */
+@import url("https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap");
+body, html {
+  width: 100%;
+  font-family: "Amiko", sans-serif;
+  color: black;
+  scroll-behavior: smooth;
+}
 
- body, html {
-   width:100%;
-   font-family: 'Amiko', sans-serif;
-   color: black;
- }
- body {
-    position: relative;
-    line-height:1.5em;
-    /* // text-align: center; */
- }
- @import url('https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap');
- * {
-   box-sizing: border-box;
-   list-style-type: none;
-   text-decoration: none;
-   color: black;
-   margin:0;
-   padding:0;
- }
+body {
+  position: relative;
+  line-height: 1.5em;
+}
 
- nav {
-     background-color: white;
-     display: flex;
-     flex-direction: row;
-     justify-content: space-around;
-    font-family: 'Barlow', sans-serif;
-    letter-spacing: .03em;
-    width: 100%;
-    padding-bottom: 1.7em;
-    padding-top: 1.5em;
-    font-size: 1.4em;
- }
- nav > a {
-     border: .5mm solid #AF62CC;
-     border-radius: .15em;
-     padding: 0.4em 2em 0.4em 2em;
- }
- nav ul {
-    width: 70vw;
-    padding-left: 3em;
+* {
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+nav {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-family: "Barlow", sans-serif;
+  letter-spacing: 0.03em;
+  width: 100%;
+  padding-bottom: 1.7em;
+  padding-top: 1.5em;
+  font-size: 1.4em;
+}
+
+nav > a {
+  border: 0.5mm solid #AF62CC;
+  border-radius: 0.15em;
+  padding: 0.4em 2em 0.4em 2em;
+}
+
+nav ul {
+  width: 70vw;
+  padding-left: 3em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.bgnd
-{
-    position: fixed;
-    object-fit: cover;
-    width: 100%;
-    z-index: -3;
-    filter: opacity(10%);
+
+.bgnd {
+  position: fixed;
+  object-fit: cover;
+  width: 100%;
+  z-index: -3;
+  filter: opacity(10%);
 }
-@media screen and (max-width: 960px)
-{
- nav {
+
+@media screen and (max-width: 960px) {
+  nav {
     display: none;
- }
-
+  }
+}
+.section {
+  text-align: justify;
+  margin-bottom: 10vw;
+  display: flex;
+  flex-direction: row;
 }
 
-.text
-{
-    font-size: 1.15em;
-    padding: 2em 4em 2em 4em;
-    text-align: justify;
-}
-.text p
-{
-    text-indent: 4em;
-    padding-bottom: .5em;
-    padding-top: .5em;
-}
-.text h4
-{
-    padding-bottom: 1em;
-    font-size: 1.3em;
-}
-#Projet_domotique img
-{
-    width: 40vw;
-    padding-left: 4em;
-}
-#Projet_robot img
-{
-    width: 20vw;
-    padding-left: 4em;
-}
-#Projet_walker img
-{
-    width: 40vw;
-    padding-left: 4em;
-}
-#Projet_volets img
-{
-    width: 25vw;
-    padding-left: 4em;
-}
-#Projet_gsm img
-{
-    width: 25vw;
-    padding-left: 4em;
-}
-#Projet_radar img
-{
-    width: 25vw;
-    padding-left: 4em;
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.section .img .text {
+  position: absolute;
+}
 
-footer {
-    padding-top: 3em;
-    display: flex;
-    flex-direction: column;
-    border-top: .2mm solid grey;
-    margin-top: 25vw;
-    background-color: rgba(255, 255, 255, 0.3);
+.section .img .text a {
+  font-size: 1.7em;
+  border-radius: 0.15em;
+  padding: 0.4em 2em 0.4em 2em;
 }
-footer .socials {
-    height: 5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding-left: 9em;
-    padding-right: 9em;
+
+.section .img .text * {
+  color: white;
+  text-align: center;
 }
-footer .title {
-    text-align: center;
-    padding-bottom: 3em;
+
+.section .img img {
+  height: 50vh;
+  margin: 0 1em 0 1em;
+  filter: blur(4px);
 }
-footer img {
-    height: 3.5em;
+
+.section .img:hover img {
+  transition: 0.2s;
+  filter: none;
 }
-footer #bottom {
+
+.section .img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section .text p {
+  margin: 0 2em 0 2em;
+  font-size: 1.5em;
+}
+
+.section > .text p::first-letter {
+  float: left;
+  font-size: 4em;
+  padding: 0 0.1em 0.1em 0;
+}
+
+#projet_walker > .text p::first-letter {
+  color: #32662f;
+}
+
+#projet_walker .img .text a {
+  border: 0.5mm solid #32662f;
+}
+
+#projet_walker .img .text:hover a {
+  background-color: #32662f;
+  opacity: 0.9;
+}
+
+#projet_domotique > .text p::first-letter {
+  color: #AF62CC;
+}
+
+#projet_domotique .img .text a {
+  border: 0.5mm solid #AF62CC;
+}
+
+#projet_domotique .img .text:hover a {
+  background-color: #AF62CC;
+  opacity: 0.9;
+}
+
+#projet_robot > .text p::first-letter {
+  color: #B39556;
+}
+
+#projet_robot .img .text a {
+  border: 0.5mm solid #B39556;
+}
+
+#projet_robot .img .text:hover a {
+  background-color: #B39556;
+  opacity: 0.9;
+}
+
+#projet_gsm > .text p::first-letter {
+  color: #B39556;
+}
+
+#projet_gsm .img .text a {
+  border: 0.5mm solid #B39556;
+}
+
+#projet_gsm .img .text:hover a {
+  background-color: #B39556;
+  opacity: 0.9;
+}
+
+#projet_radar > .text p::first-letter {
+  color: #B39556;
+}
+
+#projet_radar .img .text a {
+  border: 0.5mm solid #B39556;
+}
+
+#projet_radar .img .text:hover a {
+  background-color: #B39556;
+  opacity: 0.9;
+}
+
+#projet_volets > .text p::first-letter {
+  color: #B39556;
+}
+
+#projet_volets .img .text a {
+  border: 0.5mm solid #B39556;
+}
+
+#projet_volets .img .text:hover a {
+  background-color: #B39556;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 960px) {
+  .section > .text {
+    display: none;
+  }
+
+  .section .img img {
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    filter: none;
+  }
+
+  .section .img .text {
     margin-top: 1em;
-    border-top: .8mm solid black;
-    text-align: center;
-    padding-top: .8em;
-    padding-bottom: 1em;
+    margin-bottom: 2em;
+    position: relative;
+  }
+
+  .section .img .text * {
+    color: black;
+  }
+
+  .section .img .text p {
+    font-size: 1.3em;
+  }
+
+  #projet_walker .img .text p {
+    color: #32662f;
+  }
 }
-iframe {
-    width: 100%;
-    min-height: 100vh;
+footer {
+  padding-top: 3em;
+  display: flex;
+  flex-direction: column;
+  border-top: 0.2mm solid grey;
+  margin-top: 25vw;
+  background-color: rgba(255, 255, 255, 0.3);
 }
+
+footer .socials {
+  height: 5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 9em;
+  padding-right: 9em;
+}
+
+footer .title {
+  text-align: center;
+  padding-bottom: 3em;
+}
+
+footer img {
+  height: 3.5em;
+}
+
+footer #bottom {
+  margin-top: 1em;
+  border-top: 0.8mm solid black;
+  text-align: center;
+  padding-top: 0.8em;
+  padding-bottom: 1em;
+}
+
+/*# sourceMappingURL=style.css.map */
