@@ -60,7 +60,6 @@ nav ul {
   object-fit: cover;
   width: 100%;
   z-index: -3;
-  filter: opacity(10%);
 }
 
 @media screen and (max-width: 960px) {
