@@ -2,7 +2,7 @@
  * @Author: rahaingomanana <laurent>
  * @Date:   2019-10-19T23:54:21+02:00
  * @Email:  laurent.rahaingomanana@estaca.eu
- * @Filename: style.css
+ * @Filename: style.scss
 // @Last modified by:   laurent
 // @Last modified time: 2021-10-05T20:30:16+02:00
  */
@@ -10,8 +10,9 @@
  body, html {
    width:100%;
    font-family: 'Amiko', sans-serif;
-   color: black;
+   color: white;
    scroll-behavior: smooth;
+   background-color: rgb(54, 54, 54);
  }
  body {
     position: relative;
@@ -24,20 +25,20 @@
    text-decoration: none;
    margin:0;
    padding:0;
-   color: black;
+   color: white;
 
  }
 
  nav {
-     background-color: white;
+    //  background-color: white;
      display: flex;
      flex-direction: row;
      justify-content: space-around;
     font-family: 'Barlow', sans-serif;
     letter-spacing: .03em;
     width: 100%;
-    padding-bottom: 1.7em;
-    padding-top: 1.5em;
+    padding-bottom: .6em;
+    padding-top: .9em;
     font-size: 1.4em;
  }
  nav > a {
