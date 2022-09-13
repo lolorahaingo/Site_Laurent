@@ -12,7 +12,7 @@ body, html {
   font-family: "Amiko", sans-serif;
   color: white;
   scroll-behavior: smooth;
-  background-color: #363636;
+  background-color: rgb(54, 54, 54);
 }
 
 body {
@@ -36,17 +36,15 @@ nav {
   font-family: "Barlow", sans-serif;
   letter-spacing: 0.03em;
   width: 100%;
-  padding-bottom: 0.6em;
+  padding-bottom: 1.5em;
   padding-top: 0.9em;
   font-size: 1.4em;
 }
-
 nav > a {
-  border: 0.5mm solid #AF62CC;
+  border: 0.5mm solid #B39556;
   border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
-
 nav ul {
   width: 70vw;
   padding-left: 3em;
@@ -55,53 +53,43 @@ nav ul {
   justify-content: space-around;
 }
 
-.bgnd {
-  position: fixed;
-  object-fit: cover;
-  width: 100%;
-  z-index: -3;
-}
-
-@media screen and (max-width: 960px) {
-  nav {
-    display: none;
-  }
-}
 #presentation {
   position: relative;
   margin-bottom: 18vw;
   width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: left;
   align-items: center;
   height: auto;
 }
-
-#presentation img {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 70vh;
-  object-fit: cover;
-}
-
 #presentation .text {
   z-index: 1;
-  position: absolute;
+  position: relative;
   height: 100%;
-  text-align: center;
   width: 100%;
 }
-
 #presentation .text p {
   color: white;
   margin-bottom: 1em;
   margin-right: 1em;
   margin-left: 1em;
-  font-size: 1.5em;
+  padding-top: 0.2em;
+  font-size: 2.5vw;
+  background-color: rgb(54, 54, 54);
+  opacity: 50%;
 }
-
+#presentation .text h4 {
+  line-height: 1em;
+  font-size: 5vw;
+  margin-bottom: 1em;
+  padding-bottom: 0.2em;
+  padding-top: 0.3em;
+  color: white;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
 #presentation .text a {
   color: white;
   font-size: 1.7em;
@@ -109,28 +97,54 @@ nav ul {
   border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
-
-#presentation .text h4 {
-  line-height: 1em;
-  font-size: 4.5em;
-  padding-bottom: 1em;
-  color: white;
+#presentation img {
+  position: relative;
+  width: 35%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-@media screen and (max-width: 960px) {
-  #presentation .text h4 {
-    font-size: 3.5em;
-  }
-
-  #presentation .text p {
-    font-size: 1.3em;
-  }
-}
 .section {
   text-align: justify;
   margin-bottom: 10vw;
   display: flex;
   flex-direction: row;
+}
+.section .img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.section .img img {
+  width: 40vw;
+  filter: blur(4px);
+}
+.section .img:hover img {
+  transition: 0.2s;
+  filter: none;
+}
+.section .img .text {
+  position: absolute;
+  font-size: 1.5em;
+}
+.section .img .text a {
+  font-size: 1.7em;
+  padding: 0.4em 2em 0.4em 2em;
+}
+.section .img .text * {
+  color: white;
+  text-align: center;
+}
+.section > .text p {
+  margin: 0 2em 0 2em;
+  font-size: 1.5em;
+}
+.section > .text p::first-letter {
+  float: left;
+  font-size: 4em;
+  padding: 0 0.1em 0.1em 0;
 }
 
 .text {
@@ -140,59 +154,13 @@ nav ul {
   align-items: center;
 }
 
-.section .img .text {
-  position: absolute;
-}
-
-.section .img .text a {
-  font-size: 1.7em;
-  border-radius: 0.15em;
-  padding: 0.4em 2em 0.4em 2em;
-}
-
-.section .img .text * {
-  color: white;
-  text-align: center;
-}
-
-.section .img img {
-  height: 50vh;
-  margin: 0 1em 0 1em;
-  filter: blur(4px);
-}
-
-.section .img:hover img {
-  transition: 0.2s;
-  filter: none;
-}
-
-.section .img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.section .text p {
-  margin: 0 2em 0 2em;
-  font-size: 1.5em;
-}
-
-.section > .text p::first-letter {
-  float: left;
-  font-size: 4em;
-  padding: 0 0.1em 0.1em 0;
-}
-
 #experience > .text p::first-letter {
   color: #AF62CC;
 }
-
 #experience .img .text a {
   border: 0.5mm solid #AF62CC;
 }
-
-#experience .img .text:hover a {
+#experience .img .text a:hover {
   background-color: #AF62CC;
   opacity: 0.9;
 }
@@ -200,12 +168,10 @@ nav ul {
 #projets > .text p::first-letter {
   color: #32662f;
 }
-
 #projets .img .text a {
   border: 0.5mm solid #32662f;
 }
-
-#projets .img .text:hover a {
+#projets .img .text a:hover {
   background-color: #32662f;
   opacity: 0.9;
 }
@@ -213,54 +179,14 @@ nav ul {
 #musique > .text p::first-letter {
   color: #B39556;
 }
-
 #musique .img .text a {
   border: 0.5mm solid #B39556;
 }
-
 #musique .img .text:hover a {
   background-color: #B39556;
   opacity: 0.9;
 }
 
-@media screen and (max-width: 960px) {
-  .section > .text {
-    display: none;
-  }
-
-  .section .img img {
-    margin: 0;
-    width: 100vw;
-    height: auto;
-    filter: none;
-  }
-
-  .section .img .text {
-    margin-top: 1em;
-    margin-bottom: 2em;
-    position: relative;
-  }
-
-  .section .img .text * {
-    color: black;
-  }
-
-  .section .img .text p {
-    font-size: 1.3em;
-  }
-
-  #experience .img .text p {
-    color: #AF62CC;
-  }
-
-  #projets .img .text p {
-    color: #32662f;
-  }
-
-  #musique .img .text p {
-    color: #B39556;
-  }
-}
 footer {
   padding-top: 3em;
   display: flex;
@@ -269,7 +195,6 @@ footer {
   margin-top: 25vw;
   background-color: rgba(255, 255, 255, 0.3);
 }
-
 footer .socials {
   height: 5em;
   display: flex;
@@ -278,16 +203,13 @@ footer .socials {
   padding-left: 9em;
   padding-right: 9em;
 }
-
 footer .title {
   text-align: center;
   padding-bottom: 3em;
 }
-
 footer img {
   height: 3.5em;
 }
-
 footer #bottom {
   margin-top: 1em;
   border-top: 0.8mm solid black;
@@ -296,4 +218,62 @@ footer #bottom {
   padding-bottom: 1em;
 }
 
-/*# sourceMappingURL=style.css.map */
+@media screen and (max-width: 960px) {
+  nav {
+    display: none;
+  }
+  .section > .text {
+    display: none;
+  }
+  .section .img img {
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    filter: none;
+  }
+  .section .img .text {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    position: relative;
+  }
+  .section .img .text * {
+    color: black;
+  }
+  .section .img .text p {
+    font-size: 1.3em;
+  }
+  #experience .img .text p {
+    color: #AF62CC;
+  }
+  #projets .img .text p {
+    color: #32662f;
+  }
+  #musique .img .text p {
+    color: #B39556;
+  }
+}
+@media screen and (max-width: 800px) {
+  #presentation {
+    position: relative;
+  }
+  #presentation .text {
+    position: absolute;
+    padding-left: 0%;
+    padding-top: 1.7em;
+  }
+  #presentation .text * {
+    line-height: 1.1em;
+    opacity: 50%;
+    background-color: rgb(54, 54, 54);
+  }
+  #presentation .text h4 {
+    font-size: 12vw;
+    margin-bottom: 5.2em;
+  }
+  #presentation .text p {
+    font-size: 5.5vw;
+  }
+  #presentation img {
+    width: 100%;
+  }
+}/*# sourceMappingURL=style.css.map */

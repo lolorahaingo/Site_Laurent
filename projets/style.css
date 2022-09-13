@@ -57,7 +57,8 @@ nav ul {
 
 .bgnd {
   position: fixed;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
   z-index: -3;
   filter: opacity(10%);
@@ -208,28 +209,23 @@ nav ul {
   .section > .text {
     display: none;
   }
-
   .section .img img {
     margin: 0;
     width: 100vw;
     height: auto;
     filter: none;
   }
-
   .section .img .text {
     margin-top: 1em;
     margin-bottom: 2em;
     position: relative;
   }
-
   .section .img .text * {
     color: black;
   }
-
   .section .img .text p {
     font-size: 1.3em;
   }
-
   #projet_walker .img .text p {
     color: #32662f;
   }
@@ -267,6 +263,4 @@ footer #bottom {
   text-align: center;
   padding-top: 0.8em;
   padding-bottom: 1em;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

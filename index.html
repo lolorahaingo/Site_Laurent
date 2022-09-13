@@ -8,7 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
     <title>Laurent Rahaingo</title>
   </head>
-  <body>
+
+	
+
+  <body onload="defile()">
 	  <!-- <img class="bgnd" src="images/bgn_black_design.jpeg" alt="fond noir design"> -->
 
 	<nav class="navigation">
@@ -20,13 +23,14 @@
 		<li class="navigation__item"><a href="/index.html#musique">Musique</a></li>
 		</ul>
 	</nav>
+	
 	<div id="presentation">
 		<div class="text">
-			<h4>À propos du Créateur,</h4>
-			<p>Cliquez sur "Voir" pour télécharger le CV de</br>Laurent Rahaingo</p>
+			<h4 id="salutation">Bonjour,<br>Je suis Laurent.</h4>
+			<p id="CV">Cliquez sur "Voir" pour télécharger mon CV</p>
 			<a href="./documents/CV Laurent Rahaingo.pdf" download>Voir</a>
 		</div>
-		<img src="images/bretagne.jpg" alt="photo de bretagne">
+		<img src="images/pdp.jpg" alt="photo de Laurent">
 	</div>
 	<div id="experience" class="section">
 		<div class=text>
@@ -39,7 +43,7 @@
 			<img src="./images/code.png" alt="photo de code informatique">
 			<div class=text>
 				<p>Cliquez sur "Voir" pour voir les expériences</p></br>
-				<a href="experience/index.html">Voir</a>
+				<a href="https://github.com/lolorahaingo">Voir</a>
 			</div>
 		</div>
 	</div>
@@ -83,3 +87,5 @@
 	</footer>
 </body>
 </html>
+
+<script type="text/javascript" src="salutation.js"></script>
