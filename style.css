@@ -7,7 +7,8 @@
 // @Last modified time: 2021-10-05T20:30:16+02:00
  */
 @import url("https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap");
-body, html {
+body,
+html {
   width: 100%;
   font-family: "Amiko", sans-serif;
   color: white;
@@ -30,27 +31,39 @@ body {
 }
 
 nav {
+  width: 100%;
+}
+nav .content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   font-family: "Barlow", sans-serif;
   letter-spacing: 0.03em;
-  width: 100%;
-  padding-bottom: 1.5em;
-  padding-top: 0.9em;
   font-size: 1.4em;
+  padding-bottom: 0.7em;
+  padding-top: 0.9em;
 }
-nav > a {
+nav .content > a {
   border: 0.5mm solid #B39556;
   border-radius: 0.15em;
   padding: 0.4em 2em 0.4em 2em;
 }
-nav ul {
+nav .content ul {
   width: 70vw;
   padding-left: 3em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+nav .content ul * {
+  vertical-align: middle;
+}
+nav .spacer {
+  width: 70%;
+  border-bottom: 1px solid white;
+  margin-bottom: 1.8em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #presentation {
@@ -167,6 +180,12 @@ nav ul {
 
 #projets > .text p::first-letter {
   color: #32662f;
+}
+#projets .img {
+  position: relative;
+}
+#projets .img .text {
+  width: 100%;
 }
 #projets .img .text a {
   border: 0.5mm solid #32662f;

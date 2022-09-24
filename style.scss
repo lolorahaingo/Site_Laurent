@@ -7,49 +7,69 @@
 // @Last modified time: 2021-10-05T20:30:16+02:00
  */
 
-body, html {
-    width:100%;
+body,
+html {
+    width: 100%;
     font-family: 'Amiko', sans-serif;
     color: white;
     scroll-behavior: smooth;
     background-color: rgb(54, 54, 54);
 }
+
 body {
     position: relative;
-    line-height:1.5em;
+    line-height: 1.5em;
 }
+
 @import url('https://fonts.googleapis.com/css?family=Amiko|Montserrat|Barlow&display=swap');
+
 * {
     box-sizing: border-box;
     list-style-type: none;
     text-decoration: none;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     color: white;
 }
 
 nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-family: 'Barlow', sans-serif;
-    letter-spacing: .03em;
     width: 100%;
-    padding-bottom: 1.5em;
-    padding-top: .9em;
-    font-size: 1.4em;
-
-    &>a {
-        border: .5mm solid #B39556;
-        border-radius: .15em;
-        padding: 0.4em 2em 0.4em 2em;
-    }
-    ul {
-        width: 70vw;
-        padding-left: 3em;
+    // text-align: center;
+   
+    .content {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        font-family: 'Barlow', sans-serif;
+        letter-spacing: .03em;
+        font-size: 1.4em;
+        padding-bottom: .7em;
+        padding-top: .9em;
+        
+        &>a {
+            border: .5mm solid #B39556;
+            border-radius: .15em;
+            padding: 0.4em 2em 0.4em 2em;
+        }
+
+        ul {
+            width: 70vw;
+            padding-left: 3em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            * {
+                vertical-align: middle;
+            }
+        }
+    }
+    .spacer {
+        width: 70%;
+        border-bottom: 1px solid white;
+        margin-bottom: 1.8em;
+        margin-left: auto;
+        margin-right: auto
     }
 }
 
@@ -79,6 +99,7 @@ nav {
             background-color: rgb(54, 54, 54);
             opacity: 50%;
         }
+
         h4 {
             line-height: 1em;
             font-size: 5vw;
@@ -88,6 +109,7 @@ nav {
             color: white;
             height: fit-content;
         }
+
         a {
             color: white;
             font-size: 1.7em;
@@ -119,14 +141,14 @@ nav {
         // display:inline;
         justify-content: center;
         align-items: center;
-        
+
         img {
             // height: 50vh;
             width: 40vw;
             // margin: 0 1em 0 1em;
             filter: blur(4px);
         }
-        
+
 
         &:hover img {
             transition: .2s;
@@ -136,10 +158,12 @@ nav {
         .text {
             position: absolute;
             font-size: 1.5em;
+
             a {
                 font-size: 1.7em;
                 padding: 0.4em 2em 0.4em 2em;
             }
+
             * {
                 color: white;
                 text-align: center;
@@ -151,12 +175,14 @@ nav {
         margin: 0 2em 0 2em;
         font-size: 1.5em;
     }
+
     &>.text p::first-letter {
         float: left;
         font-size: 4em;
         padding: 0 .1em .1em 0;
     }
 }
+
 .text {
     display: flex;
     flex-direction: column;
@@ -169,10 +195,12 @@ nav {
     &>.text p::first-letter {
         color: #AF62CC;
     }
+
     .img {
         .text {
             a {
                 border: .5mm solid #AF62CC;
+
                 &:hover {
                     background-color: #AF62CC;
                     opacity: .9;
@@ -181,14 +209,21 @@ nav {
         }
     }
 }
+
 #projets {
-    &> .text p::first-letter {
+    &>.text p::first-letter {
         color: #32662f;
     }
+
     .img {
+        position: relative;
+
         .text {
+            width: 100%;
+
             a {
                 border: .5mm solid #32662f;
+
                 &:hover {
                     background-color: #32662f;
                     opacity: .9;
@@ -197,14 +232,17 @@ nav {
         }
     }
 }
+
 #musique {
-    &> .text p::first-letter {
+    &>.text p::first-letter {
         color: #B39556;
     }
+
     .img .text {
         a {
             border: .5mm solid #B39556;
         }
+
         &:hover a {
             background-color: #B39556;
             opacity: .9;
@@ -219,6 +257,7 @@ footer {
     border-top: .2mm solid grey;
     margin-top: 25vw;
     background-color: rgba(255, 255, 255, 0.3);
+
     .socials {
         height: 5em;
         display: flex;
@@ -227,13 +266,16 @@ footer {
         padding-left: 9em;
         padding-right: 9em;
     }
+
     .title {
         text-align: center;
         padding-bottom: 3em;
     }
+
     img {
         height: 3.5em;
     }
+
     #bottom {
         margin-top: 1em;
         border-top: .8mm solid black;
@@ -243,15 +285,16 @@ footer {
     }
 }
 
-@media screen and (max-width: 960px)
-{
+@media screen and (max-width: 960px) {
     nav {
         display: none;
     }
+
     .section {
         &>.text {
             display: none;
         }
+
         .img {
             img {
                 margin: 0;
@@ -259,35 +302,40 @@ footer {
                 height: auto;
                 filter: none;
             }
+
             .text {
                 margin-top: 1em;
                 margin-bottom: 2em;
                 position: relative;
+
                 * {
                     color: black;
                 }
+
                 p {
                     font-size: 1.3em;
                 }
             }
         }
-    } 
+    }
+
     #experience .img .text p {
         color: #AF62CC;
     }
+
     #projets .img .text p {
         color: #32662f;
     }
+
     #musique .img .text p {
         color: #B39556;
     }
 }
 
-@media screen and (max-width: 800px)
-{
+@media screen and (max-width: 800px) {
     #presentation {
         position: relative;
-        
+
         // align-items: inherit;
         .text {
             position: absolute;
@@ -295,19 +343,23 @@ footer {
             // height: auto;
             // align-items: center;
             padding-top: 1.7em;
+
             * {
                 line-height: 1.1em;
                 opacity: 50%;
                 background-color: rgb(54, 54, 54);
             }
+
             h4 {
                 font-size: 12vw;
                 margin-bottom: 5.2em;
             }
+
             p {
                 font-size: 5.5vw;
             }
         }
+
         img {
             width: 100%;
         }
