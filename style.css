@@ -272,6 +272,9 @@ footer #bottom {
   }
 }
 @media screen and (max-width: 800px) {
+  * {
+    font-size: 1em;
+  }
   #presentation {
     position: relative;
   }
@@ -287,12 +290,15 @@ footer #bottom {
   }
   #presentation .text h4 {
     font-size: 12vw;
-    margin-bottom: 5.2em;
+    margin-bottom: 1em;
   }
   #presentation .text p {
     font-size: 5.5vw;
   }
   #presentation img {
     width: 100%;
+  }
+  .section .img {
+    position: absolute;
   }
 }/*# sourceMappingURL=style.css.map */
