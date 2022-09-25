@@ -298,7 +298,7 @@ footer #bottom {
   #presentation img {
     width: 100%;
   }
-  .section .img {
-    position: absolute;
+  .section .img text {
+    position: relative;
   }
 }/*# sourceMappingURL=style.css.map */
