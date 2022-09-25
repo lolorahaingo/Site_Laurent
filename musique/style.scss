@@ -193,16 +193,16 @@ nav {
 
 #experience {
     &>.text p::first-letter {
-        color: #AF62CC;
+        color: #B39556;
     }
 
     .img {
         .text {
             a {
-                border: .5mm solid #AF62CC;
+                border: .5mm solid #B39556;
 
                 &:hover {
-                    background-color: #AF62CC;
+                    background-color: #B39556;
                     opacity: .9;
                 }
             }
@@ -212,7 +212,7 @@ nav {
 
 #projets {
     &>.text p::first-letter {
-        color: #32662f;
+        color: #B39556;
     }
 
     .img {
@@ -222,10 +222,10 @@ nav {
             width: 100%;
 
             a {
-                border: .5mm solid #32662f;
+                border: .5mm solid #B39556;
 
                 &:hover {
-                    background-color: #32662f;
+                    background-color: #B39556;
                     opacity: .9;
                 }
             }
@@ -320,11 +320,11 @@ footer {
     }
 
     #experience .img .text p {
-        color: #AF62CC;
+        color: #B39556;
     }
 
     #projets .img .text p {
-        color: #32662f;
+        color: #B39556;
     }
 
     #musique .img .text p {

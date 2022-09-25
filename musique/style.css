@@ -168,18 +168,18 @@ nav .spacer {
 }
 
 #experience > .text p::first-letter {
-  color: #AF62CC;
+  color: #B39556;
 }
 #experience .img .text a {
-  border: 0.5mm solid #AF62CC;
+  border: 0.5mm solid #B39556;
 }
 #experience .img .text a:hover {
-  background-color: #AF62CC;
+  background-color: #B39556;
   opacity: 0.9;
 }
 
 #projets > .text p::first-letter {
-  color: #32662f;
+  color: #B39556;
 }
 #projets .img {
   position: relative;
@@ -188,10 +188,10 @@ nav .spacer {
   width: 100%;
 }
 #projets .img .text a {
-  border: 0.5mm solid #32662f;
+  border: 0.5mm solid #B39556;
 }
 #projets .img .text a:hover {
-  background-color: #32662f;
+  background-color: #B39556;
   opacity: 0.9;
 }
 
@@ -262,10 +262,10 @@ footer #bottom {
     font-size: 1.3em;
   }
   #experience .img .text p {
-    color: #AF62CC;
+    color: #B39556;
   }
   #projets .img .text p {
-    color: #32662f;
+    color: #B39556;
   }
   #musique .img .text p {
     color: #B39556;
