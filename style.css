@@ -81,6 +81,7 @@ nav .spacer {
   position: relative;
   height: 100%;
   width: 100%;
+  justify-content: space-between;
 }
 #presentation .text p {
   color: white;
@@ -109,6 +110,7 @@ nav .spacer {
   border: 0.5mm solid white;
   border-radius: 0.15em;
   padding: 0.4em 0.7em 0.4em 0.7em;
+  margin-bottom: 2em;
 }
 #presentation img {
   position: relative;
@@ -237,7 +239,7 @@ footer #bottom {
     position: relative;
   }
   .section .img .text a {
-    font-size: 1.1em;
+    font-size: 1.2em;
     background-color: rgb(100, 100, 100);
     border-radius: 0.2em;
   }
