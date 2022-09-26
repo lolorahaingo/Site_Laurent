@@ -1,4 +1,4 @@
-message="Bonjour,<br>Je suis Laurent."
+message="Bienvenue,<br>sur mon site."
 //CHANGER POLICE
 // style=document.getElementById("salutation").style.fontStyle
 // size=document.getElementById("salutation").style.fontSize
