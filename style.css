@@ -44,9 +44,9 @@ nav .content {
   padding-top: 0.9em;
 }
 nav .content > a {
-  border: 0.5mm solid #B39556;
+  border: 0.5mm solid rgba(255, 255, 255, 0.3);
   border-radius: 0.15em;
-  padding: 0.4em 2em 0.4em 2em;
+  padding: 0.4em;
 }
 nav .content ul {
   width: 70vw;
@@ -68,7 +68,7 @@ nav .spacer {
 
 #presentation {
   position: relative;
-  margin-bottom: 18vw;
+  margin-bottom: 5vw;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -108,7 +108,7 @@ nav .spacer {
   font-size: 1.7em;
   border: 0.5mm solid white;
   border-radius: 0.15em;
-  padding: 0.4em 2em 0.4em 2em;
+  padding: 0.4em 0.7em 0.4em 0.7em;
 }
 #presentation img {
   position: relative;
@@ -118,33 +118,48 @@ nav .spacer {
      object-fit: cover;
 }
 
+#CV {
+  margin-bottom: 10vw;
+  padding: 1em;
+  font-size: 1.5em;
+}
+
 .section {
   text-align: justify;
-  margin-bottom: 10vw;
+  margin-bottom: 18vw;
   display: flex;
   flex-direction: row;
 }
 .section .img {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.section .img img {
-  width: 40vw;
-  filter: blur(4px);
-}
 .section .img:hover img {
   transition: 0.2s;
   filter: none;
 }
+.section .img img {
+  width: 40vw;
+  filter: blur(4px);
+}
 .section .img .text {
   position: absolute;
   font-size: 1.5em;
+  width: 100%;
 }
 .section .img .text a {
   font-size: 1.7em;
-  padding: 0.4em 2em 0.4em 2em;
+  padding: 0.4em;
+  text-overflow: clip;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0.15em;
+}
+.section .img .text a:hover {
+  transition: 0.3;
+  background-color: rgb(100, 100, 100);
 }
 .section .img .text * {
   color: white;
@@ -158,6 +173,7 @@ nav .spacer {
   float: left;
   font-size: 4em;
   padding: 0 0.1em 0.1em 0;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .text {
@@ -165,45 +181,6 @@ nav .spacer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-#experience > .text p::first-letter {
-  color: #B39556;
-}
-#experience .img .text a {
-  border: 0.5mm solid #B39556;
-}
-#experience .img .text a:hover {
-  background-color: #B39556;
-  opacity: 0.9;
-}
-
-#projets > .text p::first-letter {
-  color: #B39556;
-}
-#projets .img {
-  position: relative;
-}
-#projets .img .text {
-  width: 100%;
-}
-#projets .img .text a {
-  border: 0.5mm solid #B39556;
-}
-#projets .img .text a:hover {
-  background-color: #B39556;
-  opacity: 0.9;
-}
-
-#musique > .text p::first-letter {
-  color: #B39556;
-}
-#musique .img .text a {
-  border: 0.5mm solid #B39556;
-}
-#musique .img .text:hover a {
-  background-color: #B39556;
-  opacity: 0.9;
 }
 
 footer {
@@ -215,7 +192,6 @@ footer {
   background-color: rgba(255, 255, 255, 0.3);
 }
 footer .socials {
-  height: 5em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -241,6 +217,11 @@ footer #bottom {
   nav {
     display: none;
   }
+  #CV {
+    padding: 0.7em;
+    font-size: 1.2em;
+    text-align: justify;
+  }
   .section > .text {
     display: none;
   }
@@ -255,26 +236,20 @@ footer #bottom {
     margin-bottom: 2em;
     position: relative;
   }
-  .section .img .text * {
-    color: black;
+  .section .img .text a {
+    font-size: 1.1em;
+    background-color: rgb(100, 100, 100);
+    border-radius: 0.2em;
   }
-  .section .img .text p {
-    font-size: 1.3em;
+  footer .socials {
+    padding-left: 1em;
+    padding-right: 1em;
   }
-  #experience .img .text p {
-    color: #B39556;
-  }
-  #projets .img .text p {
-    color: #B39556;
-  }
-  #musique .img .text p {
-    color: #B39556;
+  footer .socials img {
+    height: 3.9em;
   }
 }
 @media screen and (max-width: 800px) {
-  * {
-    font-size: 1em;
-  }
   #presentation {
     position: relative;
   }
@@ -294,11 +269,12 @@ footer #bottom {
   }
   #presentation .text p {
     font-size: 5.5vw;
+    margin-bottom: 4em;
   }
   #presentation img {
     width: 100%;
   }
-  .section .img text {
-    position: relative;
+  .section .img .text {
+    position: absolute;
   }
 }/*# sourceMappingURL=style.css.map */
