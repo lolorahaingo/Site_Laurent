@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Snake - Mini jeu cod&eacute; en Processing, port&eacute; en JavaScript. Projet de lyc&eacute;e par Laurent Rahaingo.">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../favicon.ico">
+  <title>Snake - Laurent Rahaingo</title>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../" class="nav__logo">L.R.</a>
+      <ul class="nav__links">
+        <li><a href="../#about">&Agrave; propos</a></li>
+        <li><a href="../#experience">Parcours</a></li>
+        <li><a href="../#projets">Projets</a></li>
+        <li><a href="../#musique">Musique</a></li>
+        <li><a href="../#services">Sites web</a></li>
+        <li><a href="../#contact" class="nav__cta">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Snake Game -->
+  <section class="section snake-page" id="top">
+    <h1 class="section__title">Snake</h1>
+    <p class="section__intro">Mini jeu cod&eacute; en Processing au lyc&eacute;e, port&eacute; ici en JavaScript.<br>Utilisez les fl&egrave;ches directionnelles pour jouer. Appuyez sur <kbd>R</kbd> pour recommencer.</p>
+
+    <div class="snake-wrapper">
+      <div class="snake-hud">
+        <span id="snake-score">Score : 0</span>
+        <span id="snake-speed">Vitesse : 200 ms</span>
+      </div>
+      <canvas id="snake-canvas" width="601" height="601"></canvas>
+      <p class="snake-mobile-hint" id="snake-mobile-hint">Utilisez les boutons ci-dessous sur mobile.</p>
+      <div class="snake-controls" id="snake-controls">
+        <div class="snake-controls__row">
+          <button class="snake-controls__btn" data-dir="up" aria-label="Haut">&#9650;</button>
+        </div>
+        <div class="snake-controls__row">
+          <button class="snake-controls__btn" data-dir="left" aria-label="Gauche">&#9664;</button>
+          <button class="snake-controls__btn" data-dir="down" aria-label="Bas">&#9660;</button>
+          <button class="snake-controls__btn" data-dir="right" aria-label="Droite">&#9654;</button>
+        </div>
+        <div class="snake-controls__row snake-controls__row--restart">
+          <button class="snake-controls__btn snake-controls__btn--restart" id="btn-restart">Rejouer (R)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section__cta">
+      <a href="https://github.com/lolorahaingo/Snake" target="_blank" rel="noopener" class="btn btn--outline">Voir le code source sur GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <section class="footer" id="contact">
+    <h2 class="section__title">Contact</h2>
+    <p class="footer__intro">Un projet ? Une question ? N'h&eacute;sitez pas &agrave; me contacter.</p>
+    <div class="footer__links">
+      <a href="mailto:laurent.rahaingomanana@gmail.com" class="footer__link">
+        <img src="../images/mail.png" alt="Ic&ocirc;ne email">
+        <span>laurent.rahaingomanana@gmail.com</span>
+      </a>
+      <a href="tel:+33629104759" class="footer__link">
+        <img src="../images/telephone.png" alt="Ic&ocirc;ne t&eacute;l&eacute;phone">
+        <span>06 29 10 47 59</span>
+      </a>
+      <a href="https://linkedin.com/in/laurent-rahaingomanana-64106210b" target="_blank" rel="noopener" class="footer__link">
+        <img src="../images/linkedin.png" alt="Logo LinkedIn">
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/lolorahaingo" target="_blank" rel="noopener" class="footer__link">
+        <span>GitHub</span>
+      </a>
+    </div>
+    <footer>
+      <p class="footer__copy">&copy; 2026 Laurent Rahaingo - Tous droits r&eacute;serv&eacute;s</p>
+      <p class="footer__legal">SIRET : 101 856 920 000 18 &mdash; H&eacute;berg&eacute; par <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> &mdash; <a href="../mentions-legales">Mentions l&eacute;gales</a></p>
+    </footer>
+  </section>
+
+  <!-- Burger menu toggle -->
+  <script>
+  (function () {
+    'use strict';
+    var burger = document.querySelector('.nav__burger');
+    var navLinks = document.querySelector('.nav__links');
+    if (burger && navLinks) {
+      burger.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('active');
+        burger.classList.toggle('active');
+        burger.setAttribute('aria-expanded', isOpen);
+      });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          navLinks.classList.remove('active');
+          burger.classList.remove('active');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  })();
+  </script>
+
+  <!-- Snake Game (port fidele du fichier Snake.pde) -->
+  <script>
+  (function () {
+    'use strict';
+
+    // --- Canvas & contexte ---
+    var canvas = document.getElementById('snake-canvas');
+    var ctx = canvas.getContext('2d');
+
+    // --- Dimensions de la grille ---
+    // Original .pde : 901x801 avec cellules de 20px
+    // On utilise un canvas plus petit (601x601) avec cellules de 20px pour le web
+    var CELL = 20;
+    var COLS = Math.floor(canvas.width / CELL);   // 30
+    var ROWS = Math.floor(canvas.height / CELL);   // 30
+
+    // --- Etat du jeu ---
+    var MAX_SNAKE = 700;
+    var snakesX = new Array(MAX_SNAKE);
+    var snakesY = new Array(MAX_SNAKE);
+    var colors  = new Array(MAX_SNAKE);
+    var snakeSize, time, moveX, moveY;
+    var snakeHeadX, snakeHeadY;
+    var foodX, foodY;
+    var lastMove, gameOver, score;
+    var animId;
+
+    // --- Elements UI ---
+    var scoreEl = document.getElementById('snake-score');
+    var speedEl = document.getElementById('snake-speed');
+
+    // --- Utilitaires couleur HSB -> RGB ---
+    // Processing HSB(100,1,1) : h in [0,100], s=1, b in [0,1]
+    function hsbToRgb(h100, s, b) {
+      var h = (h100 / 100) * 360;
+      var c = b * s;
+      var x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      var m = b - c;
+      var r, g, bl;
+      if      (h < 60)  { r = c; g = x; bl = 0; }
+      else if (h < 120) { r = x; g = c; bl = 0; }
+      else if (h < 180) { r = 0; g = c; bl = x; }
+      else if (h < 240) { r = 0; g = x; bl = c; }
+      else if (h < 300) { r = x; g = 0; bl = c; }
+      else               { r = c; g = 0; bl = x; }
+      return 'rgb(' + Math.round((r + m) * 255) + ',' + Math.round((g + m) * 255) + ',' + Math.round((bl + m) * 255) + ')';
+    }
+
+    // --- Reset ---
+    function reset() {
+      var sX = Math.floor(Math.random() * (COLS - 1)) + 1;
+      var sY = Math.floor(Math.random() * (ROWS - 1)) + 1;
+      var fX = Math.floor(Math.random() * (COLS - 1)) + 1;
+      var fY = Math.floor(Math.random() * (ROWS - 1)) + 1;
+      snakeHeadX = sX * CELL;
+      snakeHeadY = sY * CELL;
+      snakesX[0] = snakeHeadX;
+      snakesY[0] = snakeHeadY;
+      foodX = fX * CELL;
+      foodY = fY * CELL;
+      moveX = 0;
+      moveY = 0;
+      gameOver = false;
+      score = 0;
+      snakeSize = 1;
+      lastMove = performance.now();
+      time = 200;
+      colors[0] = Math.floor(Math.random() * 100);
+      updateHud();
+    }
+
+    function updateHud() {
+      scoreEl.textContent = 'Score : ' + score;
+      speedEl.textContent = 'Vitesse : ' + Math.round(time) + ' ms';
+    }
+
+    // --- Dessin grille ---
+    function drawGrid() {
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 0.5;
+      for (var i = 0; i <= COLS; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * CELL, 0);
+        ctx.lineTo(i * CELL, canvas.height);
+        ctx.stroke();
+      }
+      for (var j = 0; j <= ROWS; j++) {
+        ctx.beginPath();
+        ctx.moveTo(0, j * CELL);
+        ctx.lineTo(canvas.width, j * CELL);
+        ctx.stroke();
+      }
+    }
+
+    // --- Dessin serpent ---
+    function drawSnake() {
+      for (var i = 0; i < snakeSize; i++) {
+        ctx.fillStyle = hsbToRgb(colors[i], 1, 0.5);
+        ctx.fillRect(snakesX[i], snakesY[i], CELL, CELL);
+        // Petit contour pour distinguer les segments
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(snakesX[i], snakesY[i], CELL, CELL);
+      }
+    }
+
+    // --- Dessin nourriture ---
+    function drawFood() {
+      ctx.fillStyle = hsbToRgb(100, 1, 0.5);
+      ctx.fillRect(foodX, foodY, CELL, CELL);
+      ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(foodX, foodY, CELL, CELL);
+    }
+
+    // --- Manger ---
+    function ateFood() {
+      if (foodX === snakeHeadX && foodY === snakeHeadY) {
+        snakeSize++;
+        score++;
+        if (time > 60) time -= 3;
+        var fX = Math.floor(Math.random() * (COLS - 1)) + 1;
+        var fY = Math.floor(Math.random() * (ROWS - 1)) + 1;
+        foodX = fX * CELL;
+        foodY = fY * CELL;
+        colors[snakeSize - 1] = Math.floor(Math.random() * 100);
+        updateHud();
+      }
+    }
+
+    // --- Deplacement ---
+    function snakeMove() {
+      snakeHeadX += moveX;
+      snakeHeadY += moveY;
+
+      // Collision murs
+      if (snakeHeadX < 0 || snakeHeadX > canvas.width - 1 ||
+          snakeHeadY < 0 || snakeHeadY > canvas.height - 1) {
+        gameOver = true;
+      }
+      // Collision avec soi-meme
+      for (var i = 1; i < snakeSize; i++) {
+        if (snakesX[i] === snakeHeadX && snakesY[i] === snakeHeadY) {
+          gameOver = true;
+        }
+      }
+
+      // Deplacer la queue
+      for (var j = snakeSize; j > 0; j--) {
+        snakesX[j] = snakesX[j - 1];
+        snakesY[j] = snakesY[j - 1];
+      }
+      snakesX[0] = snakeHeadX;
+      snakesY[0] = snakeHeadY;
+    }
+
+    // --- Game Over overlay ---
+    function drawGameOver() {
+      ctx.fillStyle = 'rgba(0,0,0,0.65)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 28px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
+      ctx.font = '16px Inter, sans-serif';
+      ctx.fillStyle = '#9999aa';
+      ctx.fillText('Score : ' + score, canvas.width / 2, canvas.height / 2 + 15);
+      ctx.fillText("Appuyez sur 'R' pour recommencer", canvas.width / 2, canvas.height / 2 + 45);
+    }
+
+    // --- Ecran d'attente (avant la premiere touche) ---
+    function drawWaiting() {
+      ctx.fillStyle = '#9999aa';
+      ctx.font = '16px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Appuyez sur une fleche pour commencer', canvas.width / 2, canvas.height / 2 + 40);
+    }
+
+    // --- Boucle principale ---
+    function draw(timestamp) {
+      // Fond
+      ctx.fillStyle = '#1a1a2e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawGrid();
+
+      if (!gameOver) {
+        drawSnake();
+        drawFood();
+
+        // Afficher indication si le serpent ne bouge pas encore
+        if (moveX === 0 && moveY === 0) {
+          drawWaiting();
+        }
+
+        if (timestamp - lastMove >= time) {
+          if (moveX !== 0 || moveY !== 0) {
+            snakeMove();
+            ateFood();
+          }
+          lastMove = timestamp;
+        }
+      } else {
+        drawSnake();
+        drawFood();
+        drawGameOver();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    // --- Clavier ---
+    document.addEventListener('keydown', function (e) {
+      switch (e.key) {
+        case 'ArrowUp':
+          if (moveY !== CELL) { moveY = -CELL; moveX = 0; }
+          e.preventDefault();
+          break;
+        case 'ArrowDown':
+          if (moveY !== -CELL) { moveY = CELL; moveX = 0; }
+          e.preventDefault();
+          break;
+        case 'ArrowLeft':
+          if (moveX !== CELL) { moveX = -CELL; moveY = 0; }
+          e.preventDefault();
+          break;
+        case 'ArrowRight':
+          if (moveX !== -CELL) { moveX = CELL; moveY = 0; }
+          e.preventDefault();
+          break;
+        case 'r':
+        case 'R':
+          reset();
+          break;
+      }
+    });
+
+    // --- Controles mobiles ---
+    var controls = document.getElementById('snake-controls');
+    controls.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-dir]');
+      if (btn) {
+        var dir = btn.getAttribute('data-dir');
+        if (dir === 'up'    && moveY !== CELL)   { moveY = -CELL; moveX = 0; }
+        if (dir === 'down'  && moveY !== -CELL)  { moveY = CELL;  moveX = 0; }
+        if (dir === 'left'  && moveX !== CELL)   { moveX = -CELL; moveY = 0; }
+        if (dir === 'right' && moveX !== -CELL)  { moveX = CELL;  moveY = 0; }
+      }
+    });
+    document.getElementById('btn-restart').addEventListener('click', function () {
+      reset();
+    });
+
+    // --- Empecher le scroll sur mobile avec les fleches / swipe sur le canvas ---
+    canvas.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+
+    // --- Lancement ---
+    reset();
+    animId = requestAnimationFrame(draw);
+  })();
+  </script>
+
+</body>
+</html>
