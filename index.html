@@ -1,96 +1,274 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Menu du site de Laurent Rahaingo avec sa présentation,
-    les différents projets, ses expériences et de la musique">
-	<link rel="stylesheet" type="text/css" href="style.css">
-    <title>Laurent Rahaingo</title>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laurent Rahaingo - Ing&eacute;nieur a&eacute;ronautique, d&eacute;veloppeur et bricoleur. Projets &eacute;lectroniques, sites web sur mesure et musique.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico">
+  <title>Laurent Rahaingo</title>
+</head>
+<body>
 
-	
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">L.R.</a>
+      <ul class="nav__links">
+        <li><a href="#about">&Agrave; propos</a></li>
+        <li><a href="#experience">Parcours</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#musique">Musique</a></li>
+        <li><a href="#services">Sites web</a></li>
+        <li><a href="#contact" class="nav__cta">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-  <body onload="defile()">
-	  <!-- <img class="bgnd" src="images/bgn_black_design.jpeg" alt="fond noir design"> -->
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="hero__text">
+      <p class="hero__greeting" id="salutation">Bienvenue,<br>sur mon site.</p>
+      <h1 class="hero__title">Laurent Rahaingo</h1>
+      <p class="hero__subtitle">Ing&eacute;nieur algorithmes &amp; simulation | Bricoleur num&eacute;rique</p>
+      <div class="hero__actions">
+        <a href="./documents/CV Laurent.pdf" download class="btn btn--primary">T&eacute;l&eacute;charger mon CV</a>
+        <a href="#contact" class="btn btn--outline">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero__photo">
+      <img src="images/pdp_new.jpeg" alt="Photo de Laurent Rahaingo">
+    </div>
+  </header>
 
-	<nav class="navigation">
-		<div class="content">
-			<a href="#contact" >Contact</a>
-			<ul>
-			<li class="navigation__item"><a href="/index.html#experience" >Expériences</a></li>
-			<li class="navigation__item"><a href="/index.html#projets" >Projets réalisés</a></li>
-			<li class="navigation__item"><a href="/index.html#musique">Musique</a></li>
-			</ul>
-		</div>
-		<div class="spacer"></div>
-	</nav>
-	
-	<div id="presentation">
-		<div class="text">
-			<h4 id="salutation">Bienvenue,<br>sur mon site.</h4>
-			<!-- <p id="CV">Je recherche un CDI dans le soft/simulation/embarqué</p> -->
-			<a href="./documents/CV Laurent.pdf" download>Télécharger mon CV</a>
-		</div>
-		<img src="images/pdp.jpg" alt="photo de Laurent">
-	</div>
-	<p id="CV">J’aime comprendre, concevoir et faire fonctionner des systèmes complexes dans le monde réel.
-	</p>
-	<div id="experience" class="section">
-		<div class=text>
-			<h2>Expériences</h2></br><p>Personnelles, professionnelles ou associatives, elles m'ont formé. J'ai pu
-			acquérir des connaissances générales et techniques utiles dans le monde de l'ingénieurie. Vous pourrez découvrir mes différentes
-			expériences directement sur mon CV.
-			</p>
-		</div>
-		<div class="img">
-			<img src="./images/code.png" alt="photo de code informatique">
-			<div class=text>
-				<!-- <p>Cliquez sur "Voir" pour voir les expériences</p></br> -->
-				<a href="./documents/CV Laurent Rahaingomanana.pdf">Mes expériences</a>
-			</div>
-		</div>
-	</div>
-    <div id="projets" class="section">
-		<div class="img">
-			<img src="./images/walker.png" alt="photo du walker">
-			<div class=text>
-				<!-- <p>Cliquez sur "Voir" pour voir les projets réalisés</p></br> -->
-				<a href="https://github.com/lolorahaingo">Mes projets</a>
-			</div>
-		</div>
-        <div class=text>
-			<h2>Projets réalisés</h2></br><p>Voici quelques projets que j'ai pu réaliser. Ces projets m'ont permis
-            de découvrir et de m'améliorer dans l'informatique dès le lycée. Vous trouverez également de petites conceptions 3D
-			pour aboutir la réalisation de certains projets.
-			</p>
-		</div>
-	</div>
-    <div id="musique" class="section">
-        <div class=text>
-			<h2>Musique</h2></br><p>La harpe est l'instrument que j'ai choisi de pratiquer à 8 ans. Tout au long de mes études
-			j'ai pu continuer à travailler cet instrument et me former en tant que musicien amateur. J'ai d'ailleurs obtenu mon
-			un certificat d'étude musical avec les félicitations à l'unanimité en 2018.
-			Vous trouverez sur ce site quelques enregistrements des morceaux que j'ai pu enregistrer.</p>
-		</div>
-		<div class="img">
-			<img src="./images/harpe.jpg" alt="phot d'une harpe">
-			<div class=text>
-				<!-- <p>Cliquez sur "Voir" pour voir les enregistrements</p></br> -->
-				<a href="./musique/index.html">Mes morceaux</a>
-			</div>
-		</div>
-	</div>
+  <!-- &Agrave; propos -->
+  <section class="section" id="about">
+    <h2 class="section__title">&Agrave; propos</h2>
+    <div class="about">
+      <p class="about__text">
+        J'aime comprendre, concevoir et faire fonctionner des syst&egrave;mes complexes dans le monde r&eacute;el.
+        Passionn&eacute; par l'a&eacute;ronautique, l'&eacute;lectronique et l'informatique depuis toujours, je passe mon temps libre
+        &agrave; bricoler des projets entre Arduino, Raspberry Pi, impression 3D et lignes de code.
+        Ce site est lui-m&ecirc;me un de ces projets : h&eacute;berg&eacute;, cod&eacute; et maintenu &agrave; la main.
+      </p>
+      <div class="about__tags">
+        <span class="tag">C / C++</span>
+        <span class="tag">Python</span>
+        <span class="tag">Syst&egrave;mes embarqu&eacute;s</span>
+        <span class="tag">FPGA</span>
+        <span class="tag">Arduino</span>
+        <span class="tag">Raspberry Pi</span>
+        <span class="tag">HTML / CSS</span>
+        <span class="tag">Automatique</span>
+        <span class="tag">M&eacute;canique du vol</span>
+        <span class="tag">Guidage &amp; Navigation</span>
+        <span class="tag">CAO 3D</span>
+      </div>
+    </div>
+  </section>
 
-	<footer id="contact">
-		<div class="socials">
-			<a href="tel:0629104759" aria-label="appelle le numéro"><img src="images/telephone.png" alt="logo mail"></a>
-			<a href="mailto:laurent.rahaingomanana@estaca.eu" aria-label="envoie un mail"><img src="images/mail.png" alt="logo mail"></a>
-			<a href="https://linkedin.com/in/laurent-rahaingomanana-64106210b"><img src="images/linkedin.png" alt="logo Linkedin"></a>
-		</div>
-	</br><p id="bottom">Designed by Laurent Rahaingomanana       -       © 2022 All rights reserved</p>
-	</footer>
+  <!-- Parcours -->
+  <section class="section" id="experience">
+    <h2 class="section__title">Parcours</h2>
+    <div class="timeline">
+      <div class="timeline__item">
+        <div class="timeline__date">2023 - aujourd'hui</div>
+        <div class="timeline__content">
+          <h3>Ing&eacute;nieur Algorithmes Simulation &amp; Performance</h3>
+          <p class="timeline__company">Thales LAS France - Rungis</p>
+        </div>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__date">2023 (6 mois)</div>
+        <div class="timeline__content">
+          <h3>Ing&eacute;nieur stagiaire Guidage Pilotage Navigation</h3>
+          <p class="timeline__company">MBDA - Le Plessis-Robinson</p>
+          <p class="timeline__desc">&Eacute;tude de la mont&eacute;e d'un v&eacute;hicule &agrave; propulsion solide, du point de vue des algorithmes de guidage embarqu&eacute;s.</p>
+        </div>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__date">2022 (4 mois)</div>
+        <div class="timeline__content">
+          <h3>D&eacute;veloppeur syst&egrave;mes embarqu&eacute;s</h3>
+          <p class="timeline__company">Safran Data Systems - Les Ulis</p>
+          <p class="timeline__desc">Impl&eacute;mentation de la norme H.265 sur carte d'essai embarquant du FPGA.</p>
+        </div>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__date">2018 - 2023</div>
+        <div class="timeline__content">
+          <h3>Dipl&ocirc;me d'ing&eacute;nieur</h3>
+          <p class="timeline__company">ESTACA - Ing&eacute;nierie a&eacute;rospatiale</p>
+          <p class="timeline__desc">Vice-pr&eacute;sident de l'association d'&eacute;lectronique SiERA. Semaine de formation &agrave; ISAE-SUPAERO (facteurs humains, 18/20). Admis &agrave; la Piscine 42.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section__cta">
+      <a href="./documents/CV Laurent.pdf" download class="btn btn--outline">Voir mon CV complet</a>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section class="section section--dark" id="projets">
+    <h2 class="section__title">Projets</h2>
+    <p class="section__intro">Quelques projets que j'ai r&eacute;alis&eacute;s. Ils m'ont permis de d&eacute;couvrir et de m'am&eacute;liorer dans l'informatique et l'&eacute;lectronique d&egrave;s le lyc&eacute;e.</p>
+    <div class="projects-grid">
+      <a href="https://github.com/lolorahaingo/wireless_fencing" target="_blank" rel="noopener" class="project-card">
+        <img src="images/arduino.png" alt="Logo Arduino" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Escrime sans fil</h3>
+          <p>Syst&egrave;me d'arbitrage sans fil pour l'escrime &agrave; base d'Arduino et communication radio.</p>
+          <span class="project-card__lang">C++</span>
+        </div>
+      </a>
+      <a href="https://github.com/lolorahaingo/Volets_domotique" target="_blank" rel="noopener" class="project-card">
+        <img src="images/arduino.png" alt="Logo Arduino" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Volets domotique</h3>
+          <p>Commande IR et automatisation de volets roulants avec Arduino.</p>
+          <span class="project-card__lang">C++</span>
+        </div>
+      </a>
+      <a href="https://github.com/lolorahaingo/Robot_labyrinthe" target="_blank" rel="noopener" class="project-card">
+        <img src="images/raspberry.png" alt="Logo Raspberry Pi" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Robot labyrinthe</h3>
+          <p>Robot autonome se d&eacute;pla&ccedil;ant dans un labyrinthe.</p>
+          <span class="project-card__lang">C++</span>
+        </div>
+      </a>
+      <a href="https://github.com/lolorahaingo/Starter_box" target="_blank" rel="noopener" class="project-card">
+        <img src="images/raspberrypi.png" alt="Logo Raspberry Pi" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Starter box</h3>
+          <p>Gadget connect&eacute; pour les routeurs.</p>
+          <span class="project-card__lang">C++</span>
+        </div>
+      </a>
+      <a href="https://github.com/lolorahaingo/Snake" target="_blank" rel="noopener" class="project-card">
+        <img src="images/processing.png" alt="Logo Processing" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Snake</h3>
+          <p>Mini jeu Snake cod&eacute; en Processing.</p>
+          <span class="project-card__lang">Processing</span>
+        </div>
+      </a>
+      <a href="https://github.com/lolorahaingo/Piscine_42" target="_blank" rel="noopener" class="project-card">
+        <img src="images/code.png" alt="Photo de code informatique" class="project-card__img" loading="lazy">
+        <div class="project-card__body">
+          <h3>Piscine 42</h3>
+          <p>R&eacute;alisations de la piscine de s&eacute;lection de l'&eacute;cole 42.</p>
+          <span class="project-card__lang">C</span>
+        </div>
+      </a>
+    </div>
+    <div class="section__cta">
+      <a href="https://github.com/lolorahaingo" target="_blank" rel="noopener" class="btn btn--outline">Tous mes projets sur GitHub</a>
+    </div>
+  </section>
+
+  <!-- Musique -->
+  <section class="section" id="musique">
+    <h2 class="section__title">Musique</h2>
+    <div class="music">
+      <div class="music__img">
+        <img src="images/harpe.jpg" alt="Photo d'une harpe" loading="lazy">
+      </div>
+      <div class="music__text">
+        <p>
+          La harpe est l'instrument que j'ai choisi de pratiquer &agrave; 8 ans. Tout au long de mes &eacute;tudes
+          j'ai pu continuer &agrave; travailler cet instrument et me former en tant que musicien amateur.
+          J'ai obtenu mon certificat d'&eacute;tude musical avec les f&eacute;licitations &agrave; l'unanimit&eacute; en 2018
+          au Conservatoire de Verri&egrave;res-le-Buisson.
+        </p>
+        <p class="music__note">
+          Des enregistrements seront bient&ocirc;t disponibles.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services : cr&eacute;ation de sites web -->
+  <section class="section section--dark" id="services">
+    <h2 class="section__title">Besoin d'un site web ?</h2>
+    <div class="services">
+      <div class="services__text">
+        <p>
+          En parall&egrave;le de mon activit&eacute; d'ing&eacute;nieur, je r&eacute;alise des sites vitrines sur mesure
+          pour les professionnels et les particuliers : restaurants, artisans, PME, freelances...
+        </p>
+        <p>
+          Je cr&eacute;e votre site, puis je m'occupe de tout : h&eacute;bergement, maintenance et mises &agrave; jour,
+          le tout pour un abonnement mensuel simple et sans surprise.
+          <strong>&Agrave; partir de 50&nbsp;&euro;/mois.</strong>
+        </p>
+        <div class="services__features">
+          <div class="feature">
+            <span class="feature__icon">&#9889;</span>
+            <h3>Rapide</h3>
+            <p>Site livr&eacute; en quelques jours</p>
+          </div>
+          <div class="feature">
+            <span class="feature__icon">&#9881;</span>
+            <h3>Sur mesure</h3>
+            <p>Cod&eacute; &agrave; la main, rien de superflu</p>
+          </div>
+          <div class="feature">
+            <span class="feature__icon">&#128176;</span>
+            <h3>Tout compris</h3>
+            <p>H&eacute;bergement, maintenance et mises &agrave; jour inclus</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview du site camille-larode.fr -->
+      <div class="services__preview">
+        <h3>Exemple de r&eacute;alisation</h3>
+        <a href="https://camille-larode.fr" target="_blank" rel="noopener" class="preview">
+          <div class="preview__frame">
+            <iframe src="https://camille-larode.fr" title="Aper&ccedil;u du site camille-larode.fr" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+          </div>
+          <p class="preview__label">camille-larode.fr &rarr;</p>
+        </a>
+      </div>
+
+      <div class="services__cta">
+        <a href="#contact" class="btn btn--primary">Demander un devis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="footer" id="contact">
+    <h2 class="section__title">Contact</h2>
+    <p class="footer__intro">Un projet ? Une question ? N'h&eacute;sitez pas &agrave; me contacter.</p>
+    <div class="footer__links">
+      <a href="mailto:laurent.rahaingomanana@gmail.com" class="footer__link">
+        <img src="images/mail.png" alt="Ic&ocirc;ne email">
+        <span>laurent.rahaingomanana@gmail.com</span>
+      </a>
+      <a href="tel:+33629104759" class="footer__link">
+        <img src="images/telephone.png" alt="Ic&ocirc;ne t&eacute;l&eacute;phone">
+        <span>06 29 10 47 59</span>
+      </a>
+      <a href="https://linkedin.com/in/laurent-rahaingomanana-64106210b" target="_blank" rel="noopener" class="footer__link">
+        <img src="images/linkedin.png" alt="Logo LinkedIn">
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/lolorahaingo" target="_blank" rel="noopener" class="footer__link">
+        <span>GitHub</span>
+      </a>
+    </div>
+    <footer>
+      <p class="footer__copy">&copy; 2026 Laurent Rahaingo - Tous droits r&eacute;serv&eacute;s</p>
+    </footer>
+  </section>
+
+  <script src="salutation.js"></script>
 </body>
 </html>
-
-<script type="text/javascript" src="salutation.js"></script>
