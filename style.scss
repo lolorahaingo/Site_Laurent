@@ -702,6 +702,65 @@ ul {
   }
 }
 
+// --- Legal page ---
+.legal {
+  padding-top: 7em;
+
+  &__content {
+    max-width: 750px;
+    margin: 2em auto 0;
+
+    h2 {
+      font-family: $font-heading;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: $color-white;
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      color: $color-text;
+      line-height: 1.8;
+      margin-bottom: 0.5em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-left: 1em;
+        position: relative;
+
+        &::before {
+          content: "\2022";
+          color: $color-accent;
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+
+    a {
+      color: $color-accent;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    code {
+      background-color: rgba($color-white, 0.05);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+  }
+}
+
 // --- Responsive ---
 @media screen and (max-width: 768px) {
   .nav {
