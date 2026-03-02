@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="400" height="160">
+  <!-- Dark background -->
+  <rect width="400" height="160" fill="#0f0f23"/>
+
+  <!-- Router/box body -->
+  <rect x="130" y="70" width="140" height="65" rx="6" ry="6"
+        fill="#1a1a2e" stroke="#d0d0e8" stroke-width="2.2"/>
+
+  <!-- Antenna left -->
+  <line x1="158" y1="70" x2="148" y2="42" stroke="#d0d0e8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="148" cy="40" r="3" fill="#d0d0e8"/>
+
+  <!-- Antenna right -->
+  <line x1="242" y1="70" x2="252" y2="42" stroke="#d0d0e8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="252" cy="40" r="3" fill="#d0d0e8"/>
+
+  <!-- LED dots on the box front -->
+  <circle cx="152" cy="90" r="4" fill="#4fc3f7" opacity="0.9"/>
+  <circle cx="168" cy="90" r="4" fill="#4fc3f7" opacity="0.6"/>
+  <circle cx="184" cy="90" r="4" fill="#4fc3f7" opacity="0.3"/>
+
+  <!-- Power LED (green-ish accent) -->
+  <circle cx="248" cy="90" r="4.5" fill="#80cbc4" opacity="0.95"/>
+
+  <!-- Horizontal divider line inside box -->
+  <line x1="130" y1="103" x2="270" y2="103" stroke="#d0d0e8" stroke-width="1" opacity="0.4"/>
+
+  <!-- Port slots at bottom of box -->
+  <rect x="145" y="110" width="14" height="8" rx="2" fill="none" stroke="#d0d0e8" stroke-width="1.2" opacity="0.7"/>
+  <rect x="165" y="110" width="14" height="8" rx="2" fill="none" stroke="#d0d0e8" stroke-width="1.2" opacity="0.7"/>
+  <rect x="185" y="110" width="14" height="8" rx="2" fill="none" stroke="#d0d0e8" stroke-width="1.2" opacity="0.7"/>
+  <rect x="205" y="110" width="14" height="8" rx="2" fill="none" stroke="#d0d0e8" stroke-width="1.2" opacity="0.7"/>
+
+  <!-- Circular restart/refresh arrow (clockwise, open arc ~300°) -->
+  <!-- Arc centered at (310, 80), radius 32 -->
+  <!-- Arc from ~210° to ~120° clockwise (leaving a gap at top-right for the arrowhead) -->
+  <path d="M 310 48
+             A 32 32 0 1 1 278.7 96"
+        fill="none" stroke="#d0d0e8" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Arrowhead at the end of the arc (pointing down-left at ~210°) -->
+  <polygon points="278.7,96  270,88  284,84"
+           fill="#d0d0e8"/>
+</svg>

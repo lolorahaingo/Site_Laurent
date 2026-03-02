@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="400" height="160">
+  <!-- Dark background -->
+  <rect width="400" height="160" fill="#0f0f23"/>
+
+  <!-- Maze walls: white lines on dark background, top-down geometric maze -->
+  <!-- Outer border -->
+  <rect x="20" y="10" width="360" height="140" fill="none" stroke="#d0d0e8" stroke-width="2.5"/>
+
+  <!-- Entrance gap (top-left) -->
+  <line x1="20" y1="10" x2="20" y2="30" stroke="#0f0f23" stroke-width="3"/>
+
+  <!-- Exit gap (bottom-right) -->
+  <line x1="380" y1="130" x2="380" y2="150" stroke="#0f0f23" stroke-width="3"/>
+
+  <!-- Internal horizontal walls -->
+  <line x1="20"  y1="40"  x2="80"  y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="100" y1="40"  x2="160" y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="200" y1="40"  x2="260" y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="300" y1="40"  x2="380" y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="20"  y1="70"  x2="60"  y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="100" y1="70"  x2="180" y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="220" y1="70"  x2="300" y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="340" y1="70"  x2="380" y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="20"  y1="100" x2="100" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="140" y1="100" x2="220" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="260" y1="100" x2="320" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="360" y1="100" x2="380" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="20"  y1="130" x2="80"  y2="130" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="120" y1="130" x2="200" y2="130" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="240" y1="130" x2="300" y2="130" stroke="#d0d0e8" stroke-width="2"/>
+
+  <!-- Internal vertical walls -->
+  <line x1="60"  y1="10"  x2="60"  y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="100" y1="40"  x2="100" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="140" y1="10"  x2="140" y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="140" y1="70"  x2="140" y2="130" stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="180" y1="40"  x2="180" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="220" y1="10"  x2="220" y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="220" y1="100" x2="220" y2="150" stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="260" y1="40"  x2="260" y2="100" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="300" y1="10"  x2="300" y2="40"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="300" y1="70"  x2="300" y2="130" stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="340" y1="40"  x2="340" y2="70"  stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="340" y1="100" x2="340" y2="150" stroke="#d0d0e8" stroke-width="2"/>
+
+  <line x1="80"  y1="100" x2="80"  y2="150" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="160" y1="70"  x2="160" y2="130" stroke="#d0d0e8" stroke-width="2"/>
+  <line x1="260" y1="100" x2="260" y2="150" stroke="#d0d0e8" stroke-width="2"/>
+</svg>
