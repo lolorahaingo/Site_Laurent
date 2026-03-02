@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://laurent-rahaingo.fr/sitemap.xml
+
+Disallow: /documents/
+Disallow: /.vscode/

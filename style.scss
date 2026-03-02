@@ -775,6 +775,61 @@ ul {
   }
 }
 
+// --- FAQ ---
+.faq {
+  max-width: 750px;
+  margin-top: 1.5em;
+
+  &__item {
+    background-color: rgba($color-white, 0.03);
+    border: 1px solid rgba($color-white, 0.06);
+    border-radius: $radius;
+    margin-bottom: 0.8em;
+    transition: border-color $transition;
+
+    &[open] {
+      border-color: rgba($color-accent, 0.25);
+    }
+  }
+
+  &__question {
+    padding: 1em 1.2em;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-white;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 2.5em;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '+';
+      position: absolute;
+      right: 1.2em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: $color-accent;
+      transition: transform $transition;
+    }
+
+    details[open] > &::after {
+      content: '\2212';
+    }
+  }
+
+  &__answer {
+    padding: 0 1.2em 1.2em;
+    font-size: 0.9rem;
+    color: $color-text-dim;
+    line-height: 1.7;
+  }
+}
+
 // --- Snake Game Page ---
 .snake-page {
   padding-top: 7em;
@@ -944,6 +999,10 @@ ul {
 
   .timeline {
     padding-left: 1.5em;
+
+    &__item::before {
+      left: -1.5em;
+    }
   }
 
   .projects-grid {
