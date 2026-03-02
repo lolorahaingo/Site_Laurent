@@ -541,6 +541,9 @@ ul {
 
   &__cta {
     margin-top: 2em;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
   }
 }
 
@@ -776,5 +779,351 @@ ul {
   .hero__actions {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+// ==========================================================================
+// Page Services (/services)
+// ==========================================================================
+
+// --- Services Hero ---
+.services-hero {
+  padding-top: 7em;
+  padding-bottom: 4em;
+  text-align: center;
+
+  &__content {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: $color-white;
+    line-height: 1.2;
+    margin-bottom: 0.6em;
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    color: $color-text-dim;
+    line-height: 1.7;
+    margin-bottom: 2em;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// --- Includes grid (what's included) ---
+.includes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  margin-top: 2em;
+}
+
+// --- Pricing table ---
+.pricing-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba($color-white, 0.03);
+    border: 1px solid rgba($color-white, 0.06);
+    border-radius: $radius;
+    padding: 1.5em 2em;
+    position: relative;
+    gap: 1.5em;
+
+    &--highlight {
+      border-color: $color-accent;
+      background-color: rgba($color-accent, 0.06);
+      flex-wrap: wrap;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -0.7em;
+    right: 1.5em;
+    background-color: $color-accent;
+    color: $color-bg;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2em 0.8em;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  &__provider {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: $color-white;
+    min-width: 180px;
+  }
+
+  &__prices {
+    display: flex;
+    gap: 2em;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    color: $color-text-dim;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3em;
+  }
+
+  &__value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-text;
+
+    &--accent {
+      color: $color-accent;
+      font-size: 1.15rem;
+    }
+  }
+
+  &__note {
+    width: 100%;
+    font-size: 0.8rem;
+    color: $color-text-dim;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+}
+
+// --- Steps ---
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+  margin-top: 2em;
+
+  &__item {
+    text-align: center;
+
+    h3 {
+      font-size: 1rem;
+      color: $color-white;
+      font-weight: 600;
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: $color-text-dim;
+      line-height: 1.5;
+    }
+  }
+
+  &__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba($color-accent, 0.15);
+    color: $color-accent;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8em;
+    border: 2px solid rgba($color-accent, 0.3);
+  }
+}
+
+// --- Form ---
+.form {
+  max-width: 650px;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__url-field {
+    display: none;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  &__fallback {
+    margin-top: 2em;
+    font-size: 0.9rem;
+    color: $color-text-dim;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5em;
+
+  &__label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $color-white;
+    margin-bottom: 0.4em;
+  }
+
+  &__required {
+    color: $color-accent;
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    width: 100%;
+    padding: 0.7em 1em;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    color: $color-text;
+    background-color: $color-bg-card;
+    border: 1px solid rgba($color-white, 0.1);
+    border-radius: $radius;
+    outline: none;
+    transition: border-color $transition;
+
+    &:focus {
+      border-color: $color-accent;
+    }
+
+    &::placeholder {
+      color: rgba($color-text, 0.3);
+    }
+  }
+
+  &__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239999aa' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1em center;
+    padding-right: 2.5em;
+    cursor: pointer;
+
+    option {
+      background-color: $color-bg-card;
+      color: $color-text;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  &__radio,
+  &__checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 0.3em;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      font-size: 0.9rem;
+      color: $color-text;
+      cursor: pointer;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: $color-accent;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+  }
+
+  &__radio--vertical {
+    flex-direction: column;
+    gap: 0.6em;
+  }
+
+  &--submit {
+    margin-top: 2em;
+  }
+}
+
+// --- Services page responsive ---
+@media screen and (max-width: 900px) {
+  .includes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .includes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-table {
+    &__row {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5em 1em;
+    }
+
+    &__provider {
+      min-width: auto;
+    }
+
+    &__prices {
+      gap: 1.5em;
+    }
+
+    &__badge {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .services-hero {
+    padding-top: 5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pricing-table__prices {
+    flex-direction: column;
+    gap: 0.8em;
   }
 }
