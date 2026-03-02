@@ -179,7 +179,8 @@ ul {
   color: #4fc3f7;
   font-weight: 500;
   margin-bottom: 0.5em;
-  min-height: 2.4em;
+  line-height: 1.5;
+  min-height: 3em;
 }
 .hero__title {
   font-family: "Inter", "Barlow", sans-serif;

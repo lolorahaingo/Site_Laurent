@@ -223,7 +223,8 @@ ul {
     color: $color-accent;
     font-weight: 500;
     margin-bottom: 0.5em;
-    min-height: 2.4em;
+    line-height: 1.5;
+    min-height: 3em;          /* 2 lignes × 1.5 line-height = espace fixe pour l'animation de frappe */
   }
 
   &__title {
