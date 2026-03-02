@@ -816,12 +816,46 @@ ul {
   color: #4fc3f7;
   font-size: 1.15rem;
 }
+.pricing-table__sub {
+  font-size: 0.7rem;
+  color: #9999aa;
+  margin-top: 0.15em;
+}
 .pricing-table__note {
   width: 100%;
   font-size: 0.8rem;
   color: #9999aa;
   text-align: center;
   margin-top: 0.5em;
+}
+.pricing-table__reassurance {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 0.8em;
+  flex-wrap: wrap;
+}
+.pricing-table__reassurance-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4fc3f7;
+}
+.pricing-table__reassurance-item::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(79, 195, 247, 0.15);
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .steps {
@@ -981,6 +1015,11 @@ ul {
     right: auto;
     left: 50%;
     transform: translateX(-50%);
+  }
+  .pricing-table__reassurance {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
   }
   .steps {
     grid-template-columns: repeat(2, 1fr);
