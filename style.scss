@@ -685,6 +685,21 @@ ul {
     border-top: 1px solid rgba($color-white, 0.06);
     padding-top: 1.5em;
   }
+
+  &__legal {
+    font-size: 0.7rem;
+    color: rgba($color-text, 0.2);
+    margin-top: 0.5em;
+
+    a {
+      color: rgba($color-text, 0.3);
+      text-decoration: underline;
+
+      &:hover {
+        color: $color-accent;
+      }
+    }
+  }
 }
 
 // --- Responsive ---

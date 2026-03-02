@@ -575,6 +575,18 @@ ul {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding-top: 1.5em;
 }
+.footer__legal {
+  font-size: 0.7rem;
+  color: rgba(224, 224, 224, 0.2);
+  margin-top: 0.5em;
+}
+.footer__legal a {
+  color: rgba(224, 224, 224, 0.3);
+  text-decoration: underline;
+}
+.footer__legal a:hover {
+  color: #4fc3f7;
+}
 
 @media screen and (max-width: 768px) {
   .nav__links {
