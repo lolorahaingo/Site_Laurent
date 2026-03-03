@@ -11,7 +11,6 @@
  *
  * Secrets requis (wrangler secret put) :
  * - RESEND_API_KEY       → clé API Resend pour l'envoi de mails
- * - TURNSTILE_SECRET_KEY → clé secrète Cloudflare Turnstile
  *
  * En cas de spam :
  * - Modéré  → ajouter l'IP dans BLOCKED_IPS + wrangler deploy
@@ -126,32 +125,6 @@ export default {
     if (data._gotcha) {
       // On répond "succès" pour ne pas alerter le bot, mais on n'envoie rien
       return jsonResponse({ success: true, message: "Mail envoyé avec succès" }, 200, request);
-    }
-
-    // ─── Vérification Cloudflare Turnstile ──────────────────────
-    // Skip en localhost (les tokens de test ne passent pas la vérification production)
-    const isLocalhost = domain === "localhost" || domain === "127.0.0.1";
-
-    if (!isLocalhost) {
-      const turnstileToken = data["cf-turnstile-response"];
-      if (!turnstileToken) {
-        return jsonResponse({ error: "Vérification anti-bot requise." }, 400, request);
-      }
-
-      const turnstileResult = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          secret: env.TURNSTILE_SECRET_KEY,
-          response: turnstileToken,
-          remoteip: ip,
-        }),
-      });
-
-      const turnstileData = await turnstileResult.json();
-      if (!turnstileData.success) {
-        return jsonResponse({ error: "Vérification anti-bot échouée. Veuillez réessayer." }, 403, request);
-      }
     }
 
     // Vérification consentement RGPD côté serveur
