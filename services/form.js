@@ -12,17 +12,14 @@
     }
   }
 
-  // --- Turnstile : stocker le token dès qu'il est prêt ---
-  var turnstileToken = '';
+  // --- Turnstile : callback appelé quand le token est prêt ---
+  var pendingSend = false;
   window.onTurnstileCallback = function (token) {
-    turnstileToken = token;
+    if (pendingSend) {
+      pendingSend = false;
+      sendForm(token);
+    }
   };
-
-  function getTurnstileToken() {
-    if (turnstileToken) return turnstileToken;
-    var el = document.querySelector('[name="cf-turnstile-response"]');
-    return el ? el.value : '';
-  }
 
   var form = document.getElementById('devis-form');
   var urlWrapper = document.getElementById('url-field-wrapper');
@@ -120,47 +117,29 @@
     // Vérification RGPD côté JS (en plus du required HTML)
     var rgpdCheckbox = form.querySelector('input[name="rgpd"]');
     if (!rgpdCheckbox || !rgpdCheckbox.checked) {
-      alert('Veuillez accepter la politique de confidentialité pour envoyer votre demande.');
+      alert('Veuillez accepter la politique de confidentialit\u00e9 pour envoyer votre demande.');
       return;
     }
 
-    // Si le token est déjà prêt, envoyer directement
-    if (getTurnstileToken()) {
-      sendForm();
-      return;
-    }
-
-    // Sinon, déclencher Turnstile et attendre le token
+    // Désactiver le bouton et demander un token frais
     submitBtn.disabled = true;
+    submitBtn.classList.add('btn--loading');
     submitBtn.textContent = 'V\u00e9rification...';
+    pendingSend = true;
 
     if (typeof turnstile !== 'undefined') {
+      turnstile.reset();
       turnstile.execute();
+    } else {
+      pendingSend = false;
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('btn--loading');
+      submitBtn.textContent = 'Envoyer ma demande';
+      setFormState('error', 'La v\u00e9rification anti-bot n\'a pas pu se charger. Rechargez la page.');
     }
-
-    // Attendre le token (max 10 secondes)
-    var attempts = 0;
-    var waitForToken = setInterval(function () {
-      attempts++;
-      if (getTurnstileToken()) {
-        clearInterval(waitForToken);
-        sendForm();
-      } else if (attempts > 40) {
-        clearInterval(waitForToken);
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Envoyer ma demande';
-        setFormState('error', 'La v\u00e9rification anti-bot a expir\u00e9. Rechargez la page et r\u00e9essayez.');
-      }
-    }, 250);
   });
 
-  function sendForm() {
-    var token = getTurnstileToken();
-    if (!token) {
-      setFormState('error', 'La v\u00e9rification anti-bot a \u00e9chou\u00e9. Rechargez la page et r\u00e9essayez.');
-      return;
-    }
-
+  function sendForm(token) {
     // Gather field values
     var nom = form.querySelector('#field-nom').value.trim();
     var email = form.querySelector('#field-email').value.trim();
