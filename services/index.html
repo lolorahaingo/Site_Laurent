@@ -341,12 +341,31 @@
         <div class="form-group">
           <span class="form-group__label">Fonctionnalit&eacute;s souhait&eacute;es</span>
           <div class="form-group__checkbox">
-            <label><input type="checkbox" name="fonctionnalites" value="Formulaire de contact"> Formulaire de contact</label>
-            <label><input type="checkbox" name="fonctionnalites" value="R&eacute;servation en ligne"> R&eacute;servation en ligne</label>
-            <label><input type="checkbox" name="fonctionnalites" value="Carte Google Maps"> Carte Google Maps</label>
-            <label><input type="checkbox" name="fonctionnalites" value="Liens r&eacute;seaux sociaux"> Liens r&eacute;seaux sociaux</label>
-            <label><input type="checkbox" name="fonctionnalites" value="Galerie / Carrousel photos"> Galerie / Carrousel photos</label>
-            <label><input type="checkbox" name="fonctionnalites" value="Multilingue"> Multilingue</label>
+            <label><input type="checkbox" name="fonctionnalites" value="Formulaire de contact" data-price="20"> Formulaire de contact <span class="form-group__price">+20&nbsp;&euro;/mois</span></label>
+            <label><input type="checkbox" name="fonctionnalites" value="R&eacute;servation en ligne" data-price="30"> R&eacute;servation en ligne <span class="form-group__price">+30&nbsp;&euro;/mois</span></label>
+            <label><input type="checkbox" name="fonctionnalites" value="Carte Google Maps"> Carte Google Maps <span class="form-group__price form-group__price--free">inclus</span></label>
+            <label><input type="checkbox" name="fonctionnalites" value="Liens r&eacute;seaux sociaux"> Liens r&eacute;seaux sociaux <span class="form-group__price form-group__price--free">inclus</span></label>
+            <label><input type="checkbox" name="fonctionnalites" value="Galerie / Carrousel photos"> Galerie / Carrousel photos <span class="form-group__price form-group__price--free">inclus</span></label>
+            <label><input type="checkbox" name="fonctionnalites" value="Multilingue"> Multilingue <span class="form-group__price form-group__price--free">inclus</span></label>
+          </div>
+        </div>
+
+        <!-- R&eacute;capitulatif tarif dynamique -->
+        <div class="form__pricing" id="pricing-summary">
+          <div class="form__pricing-row">
+            <span>Cr&eacute;ation du site</span>
+            <span>490&nbsp;&euro;</span>
+          </div>
+          <div class="form__pricing-row">
+            <span>Abonnement mensuel de base</span>
+            <span>69&nbsp;&euro;/mois</span>
+          </div>
+          <div class="form__pricing-extras" id="pricing-extras">
+            <!-- Rempli dynamiquement par le JS -->
+          </div>
+          <div class="form__pricing-total">
+            <span>Total mensuel estim&eacute;</span>
+            <span id="pricing-total">69&nbsp;&euro;/mois</span>
           </div>
         </div>
       </fieldset>

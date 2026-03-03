@@ -38,6 +38,44 @@
     });
   }
 
+  // --- Dynamic pricing ---
+  var BASE_MONTHLY = 69;
+  var pricingExtras = document.getElementById('pricing-extras');
+  var pricingTotal = document.getElementById('pricing-total');
+  var fonctCheckboxes = form.querySelectorAll('input[name="fonctionnalites"]');
+
+  function updatePricing() {
+    var extras = [];
+    var total = BASE_MONTHLY;
+
+    fonctCheckboxes.forEach(function (cb) {
+      if (cb.checked && cb.dataset.price) {
+        var price = parseInt(cb.dataset.price, 10);
+        total += price;
+        // Récupérer le texte du label (sans le badge de prix)
+        var labelText = cb.parentNode.childNodes[1].textContent.trim();
+        extras.push({ name: labelText, price: price });
+      }
+    });
+
+    // Mettre à jour les lignes d'extras
+    var html = '';
+    extras.forEach(function (extra) {
+      html += '<div class="form__pricing-row">';
+      html += '<span>' + extra.name + '</span>';
+      html += '<span>+' + extra.price + '\u00a0\u20ac/mois</span>';
+      html += '</div>';
+    });
+    pricingExtras.innerHTML = html;
+
+    // Mettre à jour le total
+    pricingTotal.textContent = total + '\u00a0\u20ac/mois';
+  }
+
+  fonctCheckboxes.forEach(function (cb) {
+    cb.addEventListener('change', updatePricing);
+  });
+
   // --- Form submission ---
   form.addEventListener('submit', function (e) {
     e.preventDefault();
