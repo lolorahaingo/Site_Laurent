@@ -1274,10 +1274,11 @@ details[open] > .faq__question::after {
 .form-group__radio input[type=radio],
 .form-group__radio input[type=checkbox], .form-group__checkbox input[type=radio],
 .form-group__checkbox input[type=checkbox] {
-  accent-color: #4fc3f7;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 .form-group__price {
   font-size: 0.75rem;
