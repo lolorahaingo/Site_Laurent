@@ -218,108 +218,176 @@
 
     <form class="form" id="devis-form" novalidate>
 
-      <!-- Nom / Pr&eacute;nom -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-nom">Nom / Pr&eacute;nom <span class="form-group__required">*</span></label>
-        <input class="form-group__input" type="text" id="field-nom" name="nom" required maxlength="80" placeholder="Jean Dupont">
+      <!-- Honeypot anti-spam : champ invisible pour les humains, rempli par les bots -->
+      <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
       </div>
 
-      <!-- Email -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-email">Email <span class="form-group__required">*</span></label>
-        <input class="form-group__input" type="email" id="field-email" name="email" required maxlength="100" placeholder="jean@exemple.fr">
-      </div>
+      <!-- Section 1 : Vos coordonn&eacute;es -->
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Vos coordonn&eacute;es</legend>
 
-      <!-- Entreprise -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-entreprise">Nom de l'entreprise / activit&eacute; <span class="form-group__required">*</span></label>
-        <input class="form-group__input" type="text" id="field-entreprise" name="entreprise" required maxlength="100" placeholder="Boulangerie Dupont">
-      </div>
-
-      <!-- Type d'activit&eacute; -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-type">Type d'activit&eacute; <span class="form-group__required">*</span></label>
-        <select class="form-group__select" id="field-type" name="type" required>
-          <option value="">-- Choisir --</option>
-          <option value="Restaurant / Bar">Restaurant / Bar</option>
-          <option value="Artisan">Artisan</option>
-          <option value="Freelance / Indépendant">Freelance / Ind&eacute;pendant</option>
-          <option value="Commerce">Commerce</option>
-          <option value="PME">PME</option>
-          <option value="Association">Association</option>
-          <option value="Autre">Autre</option>
-        </select>
-      </div>
-
-      <!-- Site existant ? -->
-      <div class="form-group">
-        <span class="form-group__label">Avez-vous d&eacute;j&agrave; un site ? <span class="form-group__required">*</span></span>
-        <div class="form-group__radio">
-          <label><input type="radio" name="site-existant" value="Oui" required> Oui</label>
-          <label><input type="radio" name="site-existant" value="Non"> Non</label>
+        <div class="form__row">
+          <div class="form-group">
+            <label class="form-group__label" for="field-nom">Nom / Pr&eacute;nom <span class="form-group__required">*</span></label>
+            <input class="form-group__input" type="text" id="field-nom" name="nom" required maxlength="80" placeholder="Jean Dupont">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="field-email">Email <span class="form-group__required">*</span></label>
+            <input class="form-group__input" type="email" id="field-email" name="email" required maxlength="100" placeholder="jean@exemple.fr">
+          </div>
         </div>
-      </div>
 
-      <!-- URL conditionnelle -->
-      <div class="form-group form__url-field" id="url-field-wrapper">
-        <label class="form-group__label" for="field-url">Adresse du site existant</label>
-        <input class="form-group__input" type="url" id="field-url" name="url-existant" maxlength="200" placeholder="https://mon-site.fr">
-      </div>
-
-      <!-- Que souhaitez-vous ? -->
-      <div class="form-group">
-        <span class="form-group__label">Que souhaitez-vous ? <span class="form-group__required">*</span></span>
-        <div class="form-group__radio form-group__radio--vertical">
-          <label><input type="radio" name="souhait" value="Création d'un nouveau site" required> Cr&eacute;ation d'un nouveau site</label>
-          <label><input type="radio" name="souhait" value="Refonte d'un site existant"> Refonte d'un site existant</label>
-          <label><input type="radio" name="souhait" value="Je ne sais pas encore"> Je ne sais pas encore</label>
+        <div class="form__row">
+          <div class="form-group">
+            <label class="form-group__label" for="field-telephone">T&eacute;l&eacute;phone</label>
+            <input class="form-group__input" type="tel" id="field-telephone" name="telephone" maxlength="20" placeholder="06 12 34 56 78">
+          </div>
+          <div class="form-group">
+            <label class="form-group__label" for="field-entreprise">Nom de l'entreprise / activit&eacute; <span class="form-group__required">*</span></label>
+            <input class="form-group__input" type="text" id="field-entreprise" name="entreprise" required maxlength="100" placeholder="Boulangerie Dupont">
+          </div>
         </div>
-      </div>
 
-      <!-- Logo -->
-      <div class="form-group">
-        <span class="form-group__label">Avez-vous un logo ? <span class="form-group__required">*</span></span>
-        <div class="form-group__radio">
-          <label><input type="radio" name="logo" value="Oui" required> Oui</label>
-          <label><input type="radio" name="logo" value="Non"> Non</label>
+        <div class="form-group">
+          <label class="form-group__label" for="field-type">Type d'activit&eacute; <span class="form-group__required">*</span></label>
+          <select class="form-group__select" id="field-type" name="type" required>
+            <option value="">-- Choisir --</option>
+            <option value="Restaurant / Bar / Caf&eacute;">Restaurant / Bar / Caf&eacute;</option>
+            <option value="Boulangerie / P&acirc;tisserie">Boulangerie / P&acirc;tisserie</option>
+            <option value="Artisan">Artisan</option>
+            <option value="Freelance / Ind&eacute;pendant">Freelance / Ind&eacute;pendant</option>
+            <option value="Commerce de proximit&eacute;">Commerce de proximit&eacute;</option>
+            <option value="E-commerce">E-commerce</option>
+            <option value="PME / TPE">PME / TPE</option>
+            <option value="Association">Association</option>
+            <option value="Profession lib&eacute;rale">Profession lib&eacute;rale</option>
+            <option value="Coach / Consultant">Coach / Consultant</option>
+            <option value="Autre">Autre</option>
+          </select>
         </div>
-      </div>
 
-      <!-- Photos -->
-      <div class="form-group">
-        <span class="form-group__label">Avez-vous des photos professionnelles ? <span class="form-group__required">*</span></span>
-        <div class="form-group__radio">
-          <label><input type="radio" name="photos" value="Oui" required> Oui</label>
-          <label><input type="radio" name="photos" value="Non"> Non</label>
+        <!-- Pr&eacute;cision si "Autre" -->
+        <div class="form-group form__url-field" id="type-autre-wrapper">
+          <label class="form-group__label" for="field-type-autre">Pr&eacute;cisez votre activit&eacute;</label>
+          <input class="form-group__input" type="text" id="field-type-autre" name="type-autre" maxlength="100" placeholder="Ex : Photographe, Architecte...">
         </div>
-      </div>
+      </fieldset>
 
-      <!-- Pages souhait&eacute;es -->
-      <div class="form-group">
-        <span class="form-group__label">Pages souhait&eacute;es</span>
-        <div class="form-group__checkbox">
-          <label><input type="checkbox" name="pages" value="Accueil"> Accueil</label>
-          <label><input type="checkbox" name="pages" value="À propos"> &Agrave; propos</label>
-          <label><input type="checkbox" name="pages" value="Services / Prestations"> Services / Prestations</label>
-          <label><input type="checkbox" name="pages" value="Contact"> Contact</label>
-          <label><input type="checkbox" name="pages" value="Menu / Carte"> Menu / Carte</label>
-          <label><input type="checkbox" name="pages" value="Galerie photos"> Galerie photos</label>
-          <label><input type="checkbox" name="pages" value="Tarifs"> Tarifs</label>
-          <label><input type="checkbox" name="pages" value="Autre"> Autre</label>
+      <!-- Section 2 : Votre projet -->
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Votre projet</legend>
+
+        <div class="form-group">
+          <span class="form-group__label">Avez-vous d&eacute;j&agrave; un site ? <span class="form-group__required">*</span></span>
+          <div class="form-group__radio">
+            <label><input type="radio" name="site-existant" value="Oui" required> Oui</label>
+            <label><input type="radio" name="site-existant" value="Non"> Non</label>
+          </div>
         </div>
-      </div>
 
-      <!-- Description activit&eacute; -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-description">D&eacute;crivez votre activit&eacute; en quelques lignes <span class="form-group__required">*</span></label>
-        <textarea class="form-group__textarea" id="field-description" name="description" required maxlength="500" rows="4" placeholder="Ex : Je suis boulanger &agrave; Paris, je souhaite un site pour pr&eacute;senter ma boutique et mes produits..."></textarea>
-      </div>
+        <div class="form-group form__url-field" id="url-field-wrapper">
+          <label class="form-group__label" for="field-url">Adresse du site existant</label>
+          <input class="form-group__input" type="url" id="field-url" name="url-existant" maxlength="200" placeholder="https://mon-site.fr">
+        </div>
 
-      <!-- Ambiance -->
-      <div class="form-group">
-        <label class="form-group__label" for="field-ambiance">Sites web que vous aimez / ambiance souhait&eacute;e</label>
-        <textarea class="form-group__textarea" id="field-ambiance" name="ambiance" maxlength="300" rows="3" placeholder="Ex : J'aime le style &eacute;pur&eacute; de tel site, couleurs chaudes..."></textarea>
-      </div>
+        <div class="form-group">
+          <span class="form-group__label">Que souhaitez-vous ? <span class="form-group__required">*</span></span>
+          <div class="form-group__radio form-group__radio--vertical">
+            <label><input type="radio" name="souhait" value="Cr&eacute;ation d'un nouveau site" required> Cr&eacute;ation d'un nouveau site</label>
+            <label><input type="radio" name="souhait" value="Refonte d'un site existant"> Refonte d'un site existant</label>
+            <label><input type="radio" name="souhait" value="Je ne sais pas encore"> Je ne sais pas encore</label>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form-group">
+            <span class="form-group__label">Avez-vous un logo ? <span class="form-group__required">*</span></span>
+            <div class="form-group__radio">
+              <label><input type="radio" name="logo" value="Oui" required> Oui</label>
+              <label><input type="radio" name="logo" value="Non"> Non</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="form-group__label">Photos professionnelles ? <span class="form-group__required">*</span></span>
+            <div class="form-group__radio">
+              <label><input type="radio" name="photos" value="Oui" required> Oui</label>
+              <label><input type="radio" name="photos" value="Non"> Non</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Section 3 : Contenu & fonctionnalit&eacute;s -->
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Contenu &amp; fonctionnalit&eacute;s</legend>
+
+        <div class="form-group">
+          <span class="form-group__label">Pages souhait&eacute;es</span>
+          <div class="form-group__checkbox">
+            <label><input type="checkbox" name="pages" value="Accueil"> Accueil</label>
+            <label><input type="checkbox" name="pages" value="&Agrave; propos"> &Agrave; propos</label>
+            <label><input type="checkbox" name="pages" value="Services / Prestations"> Services / Prestations</label>
+            <label><input type="checkbox" name="pages" value="Contact"> Contact</label>
+            <label><input type="checkbox" name="pages" value="Menu / Carte"> Menu / Carte</label>
+            <label><input type="checkbox" name="pages" value="Galerie photos"> Galerie photos</label>
+            <label><input type="checkbox" name="pages" value="Tarifs"> Tarifs</label>
+            <label><input type="checkbox" name="pages" value="Blog / Actualit&eacute;s"> Blog / Actualit&eacute;s</label>
+            <label><input type="checkbox" name="pages" value="T&eacute;moignages"> T&eacute;moignages</label>
+            <label><input type="checkbox" name="pages" value="Autre"> Autre</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-group__label">Fonctionnalit&eacute;s souhait&eacute;es</span>
+          <div class="form-group__checkbox">
+            <label><input type="checkbox" name="fonctionnalites" value="Formulaire de contact"> Formulaire de contact</label>
+            <label><input type="checkbox" name="fonctionnalites" value="R&eacute;servation en ligne"> R&eacute;servation en ligne</label>
+            <label><input type="checkbox" name="fonctionnalites" value="Carte Google Maps"> Carte Google Maps</label>
+            <label><input type="checkbox" name="fonctionnalites" value="Liens r&eacute;seaux sociaux"> Liens r&eacute;seaux sociaux</label>
+            <label><input type="checkbox" name="fonctionnalites" value="Galerie / Carrousel photos"> Galerie / Carrousel photos</label>
+            <label><input type="checkbox" name="fonctionnalites" value="Multilingue"> Multilingue</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Section 4 : D&eacute;tails -->
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">D&eacute;tails</legend>
+
+        <div class="form-group">
+          <label class="form-group__label" for="field-description">D&eacute;crivez votre activit&eacute; en quelques lignes <span class="form-group__required">*</span></label>
+          <textarea class="form-group__textarea" id="field-description" name="description" required maxlength="800" rows="4" placeholder="Ex : Je suis boulanger &agrave; Paris, je souhaite un site pour pr&eacute;senter ma boutique et mes produits..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-group__label" for="field-ambiance">Sites web que vous aimez / ambiance souhait&eacute;e</label>
+          <textarea class="form-group__textarea" id="field-ambiance" name="ambiance" maxlength="500" rows="3" placeholder="Ex : J'aime le style &eacute;pur&eacute; de tel site, couleurs chaudes..."></textarea>
+        </div>
+
+        <div class="form__row">
+          <div class="form-group">
+            <span class="form-group__label">Budget envisag&eacute;</span>
+            <div class="form-group__radio form-group__radio--vertical">
+              <label><input type="radio" name="budget" value="Formule standard (490&euro; + 69&euro;/mois)"> Formule standard (490&nbsp;&euro; + 69&nbsp;&euro;/mois)</label>
+              <label><input type="radio" name="budget" value="Je souhaite en discuter"> Je souhaite en discuter</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="form-group__label">D&eacute;lai souhait&eacute;</span>
+            <div class="form-group__radio form-group__radio--vertical">
+              <label><input type="radio" name="delai" value="D&egrave;s que possible"> D&egrave;s que possible</label>
+              <label><input type="radio" name="delai" value="Dans le mois"> Dans le mois</label>
+              <label><input type="radio" name="delai" value="Pas press&eacute;"> Pas press&eacute;</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-group__label" for="field-commentaire">Autre chose &agrave; ajouter ?</label>
+          <textarea class="form-group__textarea" id="field-commentaire" name="commentaire" maxlength="500" rows="2" placeholder="Questions, pr&eacute;cisions, contraintes particuli&egrave;res..."></textarea>
+        </div>
+      </fieldset>
 
       <!-- Submit -->
       <div class="form-group form-group--submit">
