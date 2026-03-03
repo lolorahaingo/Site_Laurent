@@ -677,19 +677,15 @@ ul {
     font-size: 0.9rem;
     transition: color $transition;
 
-    img {
-      height: 24px;
-      width: auto;
-      filter: brightness(0.8);
-      transition: filter $transition;
+    svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: color $transition;
     }
 
     &:hover {
       color: $color-accent;
-
-      img {
-        filter: brightness(1);
-      }
     }
   }
 
