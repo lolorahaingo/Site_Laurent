@@ -3,6 +3,15 @@
 
   var WORKER_URL = 'https://contact-worker.lolorahaingo.workers.dev';
 
+  // --- Turnstile : clé locale vs production ---
+  var turnstileEl = document.querySelector('.cf-turnstile');
+  if (turnstileEl) {
+    var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    turnstileEl.setAttribute('data-sitekey',
+      isLocal ? '0x4AAAAAACluaw9FuPjWzSJf' : '0x4AAAAAAClt3RWhFLlgphth'
+    );
+  }
+
   var form = document.getElementById('devis-form');
   var urlWrapper = document.getElementById('url-field-wrapper');
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
