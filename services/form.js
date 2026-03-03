@@ -1,5 +1,11 @@
 var WORKER_URL = 'https://contact-worker.lolorahaingo.workers.dev';
 
+// Clé de test Turnstile en localhost
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+  var tw = document.querySelector('.cf-turnstile');
+  if (tw) tw.setAttribute('data-sitekey', '0x4AAAAAACluaw9FuPjWzSJf');
+}
+
 var form = document.getElementById('devis-form');
 var urlWrapper = document.getElementById('url-field-wrapper');
 var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
