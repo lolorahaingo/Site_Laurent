@@ -1481,16 +1481,31 @@ ul {
   &__checkbox {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 0.6em;
     margin-top: 0.3em;
 
     label {
       display: flex;
       align-items: center;
-      gap: 0.4em;
+      gap: 0.5em;
       font-size: 0.9rem;
       color: $color-text;
       cursor: pointer;
+      padding: 0.55em 1em;
+      border-radius: $radius;
+      border: 1px solid rgba($color-white, 0.08);
+      background-color: rgba($color-white, 0.03);
+      transition: border-color $transition, background-color $transition;
+
+      &:hover {
+        border-color: rgba($color-accent, 0.3);
+        background-color: rgba($color-accent, 0.03);
+      }
+
+      &:has(input:checked) {
+        border-color: $color-accent;
+        background-color: rgba($color-accent, 0.06);
+      }
     }
 
     input[type="radio"],
