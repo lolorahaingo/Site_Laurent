@@ -12,6 +12,18 @@
     }
   }
 
+  // --- Turnstile : stocker le token dès qu'il est prêt ---
+  var turnstileToken = '';
+  window.onTurnstileCallback = function (token) {
+    turnstileToken = token;
+  };
+
+  function getTurnstileToken() {
+    if (turnstileToken) return turnstileToken;
+    var el = document.querySelector('[name="cf-turnstile-response"]');
+    return el ? el.value : '';
+  }
+
   var form = document.getElementById('devis-form');
   var urlWrapper = document.getElementById('url-field-wrapper');
   var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
@@ -112,11 +124,40 @@
       return;
     }
 
-    // Vérification Turnstile
-    var turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
-    var turnstileToken = turnstileResponse ? turnstileResponse.value : '';
-    if (!turnstileToken) {
-      alert('Veuillez compléter la vérification anti-bot.');
+    // Si le token est déjà prêt, envoyer directement
+    if (getTurnstileToken()) {
+      sendForm();
+      return;
+    }
+
+    // Sinon, déclencher Turnstile et attendre le token
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'V\u00e9rification...';
+
+    if (typeof turnstile !== 'undefined') {
+      turnstile.execute();
+    }
+
+    // Attendre le token (max 10 secondes)
+    var attempts = 0;
+    var waitForToken = setInterval(function () {
+      attempts++;
+      if (getTurnstileToken()) {
+        clearInterval(waitForToken);
+        sendForm();
+      } else if (attempts > 40) {
+        clearInterval(waitForToken);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer ma demande';
+        setFormState('error', 'La v\u00e9rification anti-bot a expir\u00e9. Rechargez la page et r\u00e9essayez.');
+      }
+    }, 250);
+  });
+
+  function sendForm() {
+    var token = getTurnstileToken();
+    if (!token) {
+      setFormState('error', 'La v\u00e9rification anti-bot a \u00e9chou\u00e9. Rechargez la page et r\u00e9essayez.');
       return;
     }
 
@@ -158,7 +199,6 @@
       email: email,
       message: messageParts.join('\n\n'),
       _gotcha: gotchaValue,
-      // Champs specifiques au formulaire de devis
       telephone: telephone,
       entreprise: entreprise,
       type: type,
@@ -173,7 +213,7 @@
       delai: delai,
       ambiance: ambiance,
       rgpd: true,
-      'cf-turnstile-response': turnstileToken
+      'cf-turnstile-response': token
     };
 
     // Set loading state
@@ -197,7 +237,7 @@
     .catch(function () {
       setFormState('error', 'Impossible de contacter le serveur.');
     });
-  });
+  }
 
   // --- Form state management ---
   function setFormState(state, errorMessage) {
