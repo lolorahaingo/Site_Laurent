@@ -37,6 +37,8 @@ const CLIENTS = {
   "www.laurent-rahaingo.fr": "laurent.rahaingomanana@gmail.com",
   "camille-larode.fr":       "larode.c@hotmail.com",
   "www.camille-larode.fr":   "larode.c@hotmail.com",
+  "localhost":               "laurent.rahaingomanana@gmail.com",
+  "127.0.0.1":               "laurent.rahaingomanana@gmail.com",
   // Ajoute tes clients ici ↑
 };
 
