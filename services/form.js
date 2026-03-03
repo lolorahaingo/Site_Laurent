@@ -1,29 +1,5 @@
 var WORKER_URL = 'https://contact-worker.lolorahaingo.workers.dev';
 
-// --- Turnstile : rendu explicite ---
-var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-var SITEKEY = isLocal ? '0x4AAAAAACluaw9FuPjWzSJf' : '0x4AAAAAAClt3RWhFLlgphth';
-var turnstileWidgetId = null;
-
-window.onTurnstileLoad = function () {
-  turnstileWidgetId = turnstile.render('#turnstile-container', {
-    sitekey: SITEKEY,
-    size: 'invisible',
-    execution: 'execute',
-    callback: function (token) {
-      sendForm(token);
-    },
-    'error-callback': function () {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('btn--loading');
-        submitBtn.textContent = 'Envoyer ma demande';
-      }
-      setFormState('error', 'La v\u00e9rification anti-bot a \u00e9chou\u00e9. Rechargez la page et r\u00e9essayez.');
-    }
-  });
-};
-
 var form = document.getElementById('devis-form');
 var urlWrapper = document.getElementById('url-field-wrapper');
 var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
@@ -117,23 +93,14 @@ form.addEventListener('submit', function (e) {
     return;
   }
 
-  submitBtn.disabled = true;
-  submitBtn.classList.add('btn--loading');
-  submitBtn.textContent = 'V\u00e9rification...';
-
-  if (typeof turnstile !== 'undefined' && turnstileWidgetId !== null) {
-    turnstile.execute(turnstileWidgetId);
-  } else {
-    submitBtn.disabled = false;
-    submitBtn.classList.remove('btn--loading');
-    submitBtn.textContent = 'Envoyer ma demande';
-    setFormState('error', 'La v\u00e9rification anti-bot n\'a pas pu se charger. Rechargez la page.');
+  // Récupérer le token Turnstile
+  var turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+  var token = turnstileInput ? turnstileInput.value : '';
+  if (!token) {
+    alert('Veuillez compl\u00e9ter la v\u00e9rification anti-bot.');
+    return;
   }
-});
 
-} // end if (form)
-
-function sendForm(token) {
   var nom = form.querySelector('#field-nom').value.trim();
   var email = form.querySelector('#field-email').value.trim();
   var telephone = form.querySelector('#field-telephone').value.trim();
@@ -186,7 +153,9 @@ function sendForm(token) {
     'cf-turnstile-response': token
   };
 
-  setFormState('loading');
+  submitBtn.disabled = true;
+  submitBtn.classList.add('btn--loading');
+  submitBtn.textContent = 'Envoi en cours...';
 
   fetch(WORKER_URL, {
     method: 'POST',
@@ -205,17 +174,13 @@ function sendForm(token) {
   .catch(function () {
     setFormState('error', 'Impossible de contacter le serveur.');
   });
-}
+});
+
+} // end if (form)
 
 function setFormState(state, errorMessage) {
   var existing = form.parentNode.querySelector('.form__status');
   if (existing) existing.remove();
-
-  if (state === 'loading') {
-    submitBtn.disabled = true;
-    submitBtn.classList.add('btn--loading');
-    submitBtn.textContent = 'Envoi en cours...';
-  }
 
   if (state === 'success') {
     form.style.display = 'none';
