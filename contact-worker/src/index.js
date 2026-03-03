@@ -31,7 +31,8 @@ const BLOCKED_IPS = [
 const CLIENTS = {
   "laurent-rahaingo.fr":     "laurent.rahaingomanana@gmail.com",
   "www.laurent-rahaingo.fr": "laurent.rahaingomanana@gmail.com",
-  // "camille-larode.fr":    "camille@son-mail.fr",
+  "camille-larode.fr":       "larode.c@hotmail.com",
+  "www.camille-larode.fr":   "larode.c@hotmail.com",
   // Ajoute tes clients ici ↑
 };
 
