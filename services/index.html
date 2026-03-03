@@ -417,14 +417,14 @@
       </div>
 
       <!-- Turnstile anti-bot -->
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAAClt3RWhFLlgphth" data-callback="onTurnstileCallback" data-theme="dark" data-size="invisible"></div>
+      <div id="turnstile-container"></div>
 
       <!-- Submit -->
       <div class="form-group form-group--submit">
         <button type="submit" class="btn btn--primary">Envoyer ma demande</button>
       </div>
     </form>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" async defer></script>
 
     <p class="form__fallback">
       Vous pouvez aussi m'&eacute;crire directement &agrave;
