@@ -103,6 +103,14 @@
       return;
     }
 
+    // Vérification Turnstile
+    var turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+    var turnstileToken = turnstileResponse ? turnstileResponse.value : '';
+    if (!turnstileToken) {
+      alert('Veuillez compléter la vérification anti-bot.');
+      return;
+    }
+
     // Gather field values
     var nom = form.querySelector('#field-nom').value.trim();
     var email = form.querySelector('#field-email').value.trim();
@@ -155,7 +163,8 @@
       fonctionnalites: fonctionnalites.length > 0 ? fonctionnalites.join(', ') : 'Aucune',
       delai: delai,
       ambiance: ambiance,
-      rgpd: true
+      rgpd: true,
+      'cf-turnstile-response': turnstileToken
     };
 
     // Set loading state
