@@ -200,10 +200,20 @@
 
       var msg = document.createElement('div');
       msg.className = 'form__status form__status--success';
-      msg.innerHTML =
-        '<span class="form__status-icon">&#10003;</span>' +
-        '<h3>Demande envoy&eacute;e avec succ&egrave;s !</h3>' +
-        '<p>Merci pour votre int&eacute;r&ecirc;t. Je vous recontacte tr&egrave;s rapidement avec une proposition adapt&eacute;e.</p>';
+
+      var iconSuccess = document.createElement('span');
+      iconSuccess.className = 'form__status-icon';
+      iconSuccess.textContent = '\u2713';
+      msg.appendChild(iconSuccess);
+
+      var heading = document.createElement('h3');
+      heading.textContent = 'Demande envoy\u00e9e avec succ\u00e8s !';
+      msg.appendChild(heading);
+
+      var pSuccess = document.createElement('p');
+      pSuccess.textContent = 'Merci pour votre int\u00e9r\u00eat. Je vous recontacte tr\u00e8s rapidement avec une proposition adapt\u00e9e.';
+      msg.appendChild(pSuccess);
+
       form.parentNode.insertBefore(msg, form);
     }
 
@@ -214,11 +224,24 @@
 
       var msg = document.createElement('div');
       msg.className = 'form__status form__status--error';
-      msg.innerHTML =
-        '<span class="form__status-icon">&#10007;</span>' +
-        '<p>' + (errorMessage || 'Une erreur est survenue.') + '</p>' +
-        '<p>Vous pouvez aussi m\'&eacute;crire directement &agrave; ' +
-        '<a href="mailto:laurent.rahaingomanana@gmail.com">laurent.rahaingomanana@gmail.com</a></p>';
+
+      var iconError = document.createElement('span');
+      iconError.className = 'form__status-icon';
+      iconError.textContent = '\u2717';
+      msg.appendChild(iconError);
+
+      var pError = document.createElement('p');
+      pError.textContent = errorMessage || 'Une erreur est survenue.';
+      msg.appendChild(pError);
+
+      var pFallback = document.createElement('p');
+      pFallback.textContent = 'Vous pouvez aussi m\'\u00e9crire directement \u00e0 ';
+      var mailLink = document.createElement('a');
+      mailLink.href = 'mailto:laurent.rahaingomanana@gmail.com';
+      mailLink.textContent = 'laurent.rahaingomanana@gmail.com';
+      pFallback.appendChild(mailLink);
+      msg.appendChild(pFallback);
+
       form.parentNode.insertBefore(msg, form);
     }
   }

@@ -139,6 +139,21 @@ export default {
       return jsonResponse({ error: "Le champ 'message' est requis" }, 400, request);
     }
 
+    // ─── Validation de longueur côté serveur ──────────────────
+    const MAX_LENGTHS = {
+      nom: 80, email: 100, telephone: 20, entreprise: 100,
+      type: 100, urlExistant: 200, description: 2000,
+      ambiance: 500, commentaire: 500, message: 5000,
+      pages: 500, fonctionnalites: 500, souhait: 100,
+      logo: 50, photos: 50, budget: 100, delai: 100,
+      siteExistant: 10
+    };
+    for (const [field, maxLen] of Object.entries(MAX_LENGTHS)) {
+      if (data[field] && typeof data[field] === "string" && data[field].length > maxLen) {
+        return jsonResponse({ error: `Le champ '${field}' dépasse la longueur maximale autorisée (${maxLen} caractères).` }, 400, request);
+      }
+    }
+
     // Construire le contenu du mail
     // On inclut tous les champs envoyés (le formulaire peut varier selon le site)
     let body = `Nouveau message depuis ${domain}\n`;
