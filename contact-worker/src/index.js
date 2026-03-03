@@ -122,6 +122,11 @@ export default {
       return jsonResponse({ success: true, message: "Mail envoyé avec succès" }, 200, request);
     }
 
+    // Vérification consentement RGPD côté serveur
+    if (!data.rgpd) {
+      return jsonResponse({ error: "Le consentement RGPD est requis." }, 400, request);
+    }
+
     const { nom, email, message } = data;
 
     if (!nom || !nom.trim()) {

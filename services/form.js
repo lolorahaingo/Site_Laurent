@@ -70,6 +70,16 @@
 
     // Mettre à jour le total
     pricingTotal.textContent = total + '\u00a0\u20ac/mois';
+
+    // Mettre à jour le label et la value du radio "Formule standard"
+    var budgetStandardPrice = document.getElementById('budget-standard-price');
+    var budgetStandardRadio = document.getElementById('budget-standard');
+    if (budgetStandardPrice) {
+      budgetStandardPrice.textContent = total;
+    }
+    if (budgetStandardRadio) {
+      budgetStandardRadio.value = 'Formule standard (490\u20ac + ' + total + '\u20ac/mois)';
+    }
   }
 
   fonctCheckboxes.forEach(function (cb) {
@@ -83,6 +93,13 @@
     // Validate required fields
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    // Vérification RGPD côté JS (en plus du required HTML)
+    var rgpdCheckbox = form.querySelector('input[name="rgpd"]');
+    if (!rgpdCheckbox || !rgpdCheckbox.checked) {
+      alert('Veuillez accepter la politique de confidentialité pour envoyer votre demande.');
       return;
     }
 
@@ -137,7 +154,8 @@
       pages: pages.length > 0 ? pages.join(', ') : 'Non precisees',
       fonctionnalites: fonctionnalites.length > 0 ? fonctionnalites.join(', ') : 'Aucune',
       delai: delai,
-      ambiance: ambiance
+      ambiance: ambiance,
+      rgpd: true
     };
 
     // Set loading state

@@ -388,7 +388,7 @@
           <div class="form-group">
             <span class="form-group__label">Budget envisag&eacute;</span>
             <div class="form-group__radio form-group__radio--vertical">
-              <label><input type="radio" name="budget" value="Formule standard (490&euro; + 69&euro;/mois)"> Formule standard (490&nbsp;&euro; + 69&nbsp;&euro;/mois)</label>
+              <label><input type="radio" name="budget" id="budget-standard" value="Formule standard (490&euro; + 69&euro;/mois)"> Formule standard (490&nbsp;&euro; + <span id="budget-standard-price">69</span>&nbsp;&euro;/mois)</label>
               <label><input type="radio" name="budget" value="Je souhaite en discuter"> Je souhaite en discuter</label>
             </div>
           </div>
@@ -407,6 +407,14 @@
           <textarea class="form-group__textarea" id="field-commentaire" name="commentaire" maxlength="500" rows="2" placeholder="Questions, pr&eacute;cisions, contraintes particuli&egrave;res..."></textarea>
         </div>
       </fieldset>
+
+      <!-- Consentement RGPD -->
+      <div class="form-group form-group--consent">
+        <label class="form-group__consent">
+          <input type="checkbox" name="rgpd" required>
+          <span>J'accepte que mes donn&eacute;es soient utilis&eacute;es pour traiter ma demande. Consultez notre <a href="../mentions-legales/#donnees" target="_blank">politique de confidentialit&eacute;</a>.</span>
+        </label>
+      </div>
 
       <!-- Submit -->
       <div class="form-group form-group--submit">
