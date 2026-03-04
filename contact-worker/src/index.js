@@ -33,14 +33,14 @@ const BLOCKED_IPS = [
 
 // ─── Configuration des clients ───────────────────────────────
 // Clé   = domaine du site (sans https://)
-// Valeur = { email, turnstileSecret } (nom du secret Wrangler pour Turnstile)
+// Valeur = { email, fromName, turnstileSecret }
 const CLIENTS = {
-  "laurent-rahaingo.fr":     { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
-  "www.laurent-rahaingo.fr": { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
-  "camille-larode.fr":       { email: "larode.c@hotmail.com",            turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
-  "www.camille-larode.fr":   { email: "larode.c@hotmail.com",            turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
-  "localhost":               { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
-  "127.0.0.1":               { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
+  "laurent-rahaingo.fr":     { email: "laurent.rahaingomanana@gmail.com", fromName: "Laurent Rahaingo",  turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
+  "www.laurent-rahaingo.fr": { email: "laurent.rahaingomanana@gmail.com", fromName: "Laurent Rahaingo",  turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
+  "camille-larode.fr":       { email: "larode.c@hotmail.com",            fromName: "Camille Larode",     turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
+  "www.camille-larode.fr":   { email: "larode.c@hotmail.com",            fromName: "Camille Larode",     turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
+  "localhost":               { email: "lolorahaingo@hotmail.fr",          fromName: "Test Local",         turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
+  "127.0.0.1":               { email: "lolorahaingo@hotmail.fr",          fromName: "Test Local",         turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
   // Ajoute tes clients ici ↑
 };
 
@@ -205,43 +205,132 @@ export default {
       }
     }
 
-    // Construire le contenu du mail
-    // On inclut tous les champs envoyés (le formulaire peut varier selon le site)
-    let body = `Nouveau message depuis ${domain}\n`;
-    body += `${"─".repeat(40)}\n\n`;
+    // ─── Construction du mail ─────────────────────────────────
+    const siteName = domain.replace(/^www\./, "");
+    const subject = data.entreprise
+      ? `${data.entreprise} vous a contacte via ${siteName}`
+      : `${nom.trim()} vous a contacte via ${siteName}`;
 
-    // Coordonnées
-    body += `Nom : ${nom.trim()}\n`;
-    body += `Email : ${email.trim()}\n`;
-    if (data.telephone)    body += `Téléphone : ${data.telephone}\n`;
-    if (data.entreprise)   body += `Entreprise : ${data.entreprise}\n`;
-    if (data.type)         body += `Type d'activité : ${data.type}\n`;
+    // -- Collecter les infos structurées --
+    const contactInfo = [];
+    contactInfo.push({ label: "Nom", value: nom.trim() });
+    contactInfo.push({ label: "Email", value: email.trim() });
+    if (data.telephone)  contactInfo.push({ label: "Telephone", value: data.telephone });
+    if (data.entreprise) contactInfo.push({ label: "Entreprise", value: data.entreprise });
+    if (data.type)       contactInfo.push({ label: "Type d'activite", value: data.type });
 
-    // Projet
-    if (data.siteExistant) body += `\nSite existant : ${data.siteExistant}\n`;
-    if (data.urlExistant)  body += `URL existant : ${data.urlExistant}\n`;
-    if (data.souhait)      body += `Souhait : ${data.souhait}\n`;
-    if (data.logo)         body += `Logo : ${data.logo}\n`;
-    if (data.photos)       body += `Photos pro : ${data.photos}\n`;
+    const projectInfo = [];
+    if (data.siteExistant) projectInfo.push({ label: "Site existant", value: data.siteExistant });
+    if (data.urlExistant)  projectInfo.push({ label: "URL existant", value: data.urlExistant });
+    if (data.souhait)      projectInfo.push({ label: "Souhait", value: data.souhait });
+    if (data.logo)         projectInfo.push({ label: "Logo", value: data.logo });
+    if (data.photos)       projectInfo.push({ label: "Photos pro", value: data.photos });
+    if (data.pages)        projectInfo.push({ label: "Pages souhaitees", value: data.pages });
+    if (data.fonctionnalites) projectInfo.push({ label: "Fonctionnalites", value: data.fonctionnalites });
+    if (data.budget)       projectInfo.push({ label: "Budget", value: data.budget });
+    if (data.delai)        projectInfo.push({ label: "Delai", value: data.delai });
 
-    // Contenu & fonctionnalités
-    if (data.pages)           body += `\nPages souhaitées : ${data.pages}\n`;
-    if (data.fonctionnalites) body += `Fonctionnalités : ${data.fonctionnalites}\n`;
+    // -- Version texte brut --
+    let textBody = `Bonjour,\n\n`;
+    textBody += `Vous avez recu un nouveau message via votre site ${siteName}.\n\n`;
 
-    // Détails
-    body += `\n`;
-    body += `Message :\n${message.trim()}\n`;
+    textBody += `Expediteur\n`;
+    for (const { label, value } of contactInfo) {
+      textBody += `  ${label} : ${value}\n`;
+    }
+
+    textBody += `\nMessage\n`;
+    textBody += `  ${message.trim()}\n`;
 
     if (data.ambiance) {
-      body += `\nAmbiance / Sites aimés :\n${data.ambiance}\n`;
+      textBody += `\nAmbiance / Sites aimes\n`;
+      textBody += `  ${data.ambiance}\n`;
     }
-    if (data.budget) body += `\nBudget : ${data.budget}\n`;
-    if (data.delai)  body += `Délai : ${data.delai}\n`;
 
-    // Envoyer le mail via Resend
-    const subject = data.entreprise
-      ? `Nouveau message - ${data.entreprise}`
-      : `Nouveau message de ${nom.trim()}`;
+    if (projectInfo.length > 0) {
+      textBody += `\nDetails du projet\n`;
+      for (const { label, value } of projectInfo) {
+        textBody += `  ${label} : ${value}\n`;
+      }
+    }
+
+    textBody += `\n---\n`;
+    textBody += `Ce message a ete envoye depuis le formulaire de contact de ${siteName}.\n`;
+    textBody += `Vous pouvez repondre directement a cet email pour contacter ${nom.trim()}.`;
+
+    // -- Version HTML --
+    const escHtml = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+
+    let htmlBody = `
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#333;background-color:#f5f5f5;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f5f5;padding:24px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+
+        <tr><td style="background-color:#2c3e50;padding:24px 32px;">
+          <p style="margin:0;color:#ffffff;font-size:18px;font-weight:bold;">Nouveau message</p>
+          <p style="margin:4px 0 0;color:#bdc3c7;font-size:13px;">via ${escHtml(siteName)}</p>
+        </td></tr>
+
+        <tr><td style="padding:28px 32px;">
+          <p style="margin:0 0 20px;font-size:15px;line-height:1.5;">Bonjour,</p>
+          <p style="margin:0 0 24px;font-size:15px;line-height:1.5;">Vous avez re&ccedil;u un nouveau message depuis le formulaire de contact de <strong>${escHtml(siteName)}</strong>.</p>
+
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            <tr><td style="padding:12px 16px;background-color:#f8f9fa;border-radius:6px;">
+              <p style="margin:0 0 8px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px;font-weight:bold;">Exp&eacute;diteur</p>
+              ${contactInfo.map(({ label, value }) => `<p style="margin:0 0 4px;font-size:14px;"><strong>${escHtml(label)}</strong> : ${escHtml(value)}</p>`).join("\n              ")}
+            </td></tr>
+          </table>
+
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            <tr><td style="padding:16px;background-color:#fefefe;border:1px solid #e8e8e8;border-radius:6px;">
+              <p style="margin:0 0 8px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px;font-weight:bold;">Message</p>
+              <p style="margin:0;font-size:15px;line-height:1.6;white-space:pre-wrap;">${escHtml(message.trim())}</p>
+            </td></tr>
+          </table>`;
+
+    if (data.ambiance) {
+      htmlBody += `
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            <tr><td style="padding:16px;background-color:#fefefe;border:1px solid #e8e8e8;border-radius:6px;">
+              <p style="margin:0 0 8px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px;font-weight:bold;">Ambiance / Sites aim&eacute;s</p>
+              <p style="margin:0;font-size:15px;line-height:1.6;white-space:pre-wrap;">${escHtml(data.ambiance)}</p>
+            </td></tr>
+          </table>`;
+    }
+
+    if (projectInfo.length > 0) {
+      htmlBody += `
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            <tr><td style="padding:12px 16px;background-color:#f8f9fa;border-radius:6px;">
+              <p style="margin:0 0 8px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.5px;font-weight:bold;">D&eacute;tails du projet</p>
+              ${projectInfo.map(({ label, value }) => `<p style="margin:0 0 4px;font-size:14px;"><strong>${escHtml(label)}</strong> : ${escHtml(value)}</p>`).join("\n              ")}
+            </td></tr>
+          </table>`;
+    }
+
+    htmlBody += `
+        </td></tr>
+
+        <tr><td style="padding:20px 32px;background-color:#f8f9fa;border-top:1px solid #eee;">
+          <p style="margin:0;font-size:12px;color:#999;line-height:1.5;">
+            Ce message a &eacute;t&eacute; envoy&eacute; depuis le formulaire de contact de ${escHtml(siteName)}.<br>
+            Vous pouvez r&eacute;pondre directement &agrave; cet email pour contacter ${escHtml(nom.trim())}.
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+    // ─── Envoi via Resend ─────────────────────────────────────
+    const fromAddress = `"Formulaire ${siteName}" <contact@laurent-rahaingo.fr>`;
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -250,11 +339,17 @@ export default {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "no-reply@laurent-rahaingo.fr",
+        from: fromAddress,
         to: clientEmail,
         reply_to: email.trim(),
         subject: subject,
-        text: body,
+        text: textBody,
+        html: htmlBody,
+        headers: {
+          "X-Auto-Response-Suppress": "OOF, AutoReply",
+          "X-Entity-Ref-ID": `form-${siteName}-${Date.now()}`,
+          "Precedence": "bulk",
+        },
       }),
     });
 
