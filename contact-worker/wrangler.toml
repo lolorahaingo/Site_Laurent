@@ -2,5 +2,9 @@ name = "contact-worker"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
-# La clé API Resend est stockée comme secret (pas en dur ici)
-# Pour la configurer : wrangler secret put RESEND_API_KEY
+# Les secrets sont stockés via wrangler (pas en dur ici)
+# Pour les configurer :
+#   wrangler secret put RESEND_API_KEY
+#   wrangler secret put TURNSTILE_SECRET_LAURENT
+#   wrangler secret put TURNSTILE_SECRET_CAMILLE
+#   wrangler secret put TURNSTILE_SECRET_LOCALHOST

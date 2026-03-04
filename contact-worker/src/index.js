@@ -10,7 +10,10 @@
  * 2. Redéployer : wrangler deploy
  *
  * Secrets requis (wrangler secret put) :
- * - RESEND_API_KEY       → clé API Resend pour l'envoi de mails
+ * - RESEND_API_KEY              → clé API Resend pour l'envoi de mails
+ * - TURNSTILE_SECRET_LAURENT    → clé secrète Turnstile pour laurent-rahaingo.fr
+ * - TURNSTILE_SECRET_CAMILLE    → clé secrète Turnstile pour camille-larode.fr
+ * - TURNSTILE_SECRET_LOCALHOST  → clé secrète Turnstile pour localhost / 127.0.0.1
  *
  * En cas de spam :
  * - Modéré  → ajouter l'IP dans BLOCKED_IPS + wrangler deploy
@@ -30,14 +33,14 @@ const BLOCKED_IPS = [
 
 // ─── Configuration des clients ───────────────────────────────
 // Clé   = domaine du site (sans https://)
-// Valeur = email du client qui recevra les messages
+// Valeur = { email, turnstileSecret } (nom du secret Wrangler pour Turnstile)
 const CLIENTS = {
-  "laurent-rahaingo.fr":     "laurent.rahaingomanana@gmail.com",
-  "www.laurent-rahaingo.fr": "laurent.rahaingomanana@gmail.com",
-  "camille-larode.fr":       "larode.c@hotmail.com",
-  "www.camille-larode.fr":   "larode.c@hotmail.com",
-  "localhost":               "laurent.rahaingomanana@gmail.com",
-  "127.0.0.1":               "laurent.rahaingomanana@gmail.com",
+  "laurent-rahaingo.fr":     { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
+  "www.laurent-rahaingo.fr": { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LAURENT" },
+  "camille-larode.fr":       { email: "larode.c@hotmail.com",            turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
+  "www.camille-larode.fr":   { email: "larode.c@hotmail.com",            turnstileSecret: "TURNSTILE_SECRET_CAMILLE" },
+  "localhost":               { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
+  "127.0.0.1":               { email: "laurent.rahaingomanana@gmail.com", turnstileSecret: "TURNSTILE_SECRET_LOCALHOST" },
   // Ajoute tes clients ici ↑
 };
 
@@ -71,6 +74,23 @@ async function isRateLimited(ip) {
   await cache.put(cacheKey, response);
 
   return false;
+}
+
+// ─── Vérification Cloudflare Turnstile ───────────────────────
+// Valide le token Turnstile côté serveur via l'API siteverify
+async function verifyTurnstile(token, ip, secretKey) {
+  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      secret: secretKey,
+      response: token,
+      remoteip: ip,
+    }),
+  });
+
+  const result = await response.json();
+  return result;
 }
 
 // ─── Worker principal ────────────────────────────────────────
@@ -107,11 +127,12 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const domain = origin.replace(/^https?:\/\//, "");
 
-    if (!CLIENTS[domain]) {
+    const client = CLIENTS[domain];
+    if (!client) {
       return jsonResponse({ error: "Site non autorisé" }, 403, request);
     }
 
-    const clientEmail = CLIENTS[domain];
+    const clientEmail = client.email;
 
     // Lire et valider les données du formulaire
     let data;
@@ -125,6 +146,31 @@ export default {
     if (data._gotcha) {
       // On répond "succès" pour ne pas alerter le bot, mais on n'envoie rien
       return jsonResponse({ success: true, message: "Mail envoyé avec succès" }, 200, request);
+    }
+
+    // ─── Vérification antibot Cloudflare Turnstile ────────────
+    const turnstileToken = data["cf-turnstile-response"];
+
+    if (!turnstileToken) {
+      return jsonResponse({ error: "Vérification antibot requise. Veuillez réessayer." }, 400, request);
+    }
+
+    try {
+      const turnstileSecretKey = env[client.turnstileSecret];
+      if (!turnstileSecretKey) {
+        console.error("Turnstile secret not configured for domain:", domain);
+        return jsonResponse({ error: "Erreur de configuration antibot." }, 500, request);
+      }
+
+      const turnstileResult = await verifyTurnstile(turnstileToken, ip, turnstileSecretKey);
+
+      if (!turnstileResult.success) {
+        console.error("Turnstile verification failed:", JSON.stringify(turnstileResult));
+        return jsonResponse({ error: "La vérification antibot a échoué. Veuillez réessayer." }, 403, request);
+      }
+    } catch (e) {
+      console.error("Turnstile verification error:", e);
+      return jsonResponse({ error: "Erreur lors de la vérification antibot." }, 500, request);
     }
 
     // Vérification consentement RGPD côté serveur

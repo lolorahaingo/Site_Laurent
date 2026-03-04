@@ -1,10 +1,43 @@
 var WORKER_URL = 'https://contact-worker.lolorahaingo.workers.dev';
 
+var TURNSTILE_SITEKEYS = {
+  'laurent-rahaingo.fr': '0x4AAAAAAClt3RWhFLlgphth',
+  'www.laurent-rahaingo.fr': '0x4AAAAAAClt3RWhFLlgphth',
+  'localhost': '0x4AAAAAACluaw9FuPjWzSJf',
+  '127.0.0.1': '0x4AAAAAACluaw9FuPjWzSJf'
+};
+var TURNSTILE_SITEKEY = TURNSTILE_SITEKEYS[window.location.hostname] || TURNSTILE_SITEKEYS['localhost'];
+var turnstileToken = '';
+
 var form = document.getElementById('devis-form');
 var urlWrapper = document.getElementById('url-field-wrapper');
 var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
 
 if (form) {
+
+// --- Cloudflare Turnstile antibot ---
+function renderTurnstile() {
+  if (typeof turnstile !== 'undefined') {
+    turnstile.render('#turnstile-container', {
+      sitekey: TURNSTILE_SITEKEY,
+      appearance: 'interaction-only',
+      language: 'fr',
+      callback: function (token) {
+        turnstileToken = token;
+      },
+      'error-callback': function () {
+        turnstileToken = '';
+      },
+      'expired-callback': function () {
+        turnstileToken = '';
+      }
+    });
+  } else {
+    // Script not loaded yet, retry in 200ms
+    setTimeout(renderTurnstile, 200);
+  }
+}
+renderTurnstile();
 
 // --- Conditional URL field visibility ---
 var siteRadios = form.querySelectorAll('input[name="site-existant"]');
@@ -93,6 +126,11 @@ form.addEventListener('submit', function (e) {
     return;
   }
 
+  if (!turnstileToken) {
+    alert('Veuillez patienter pendant la vérification antibot, puis réessayez.');
+    return;
+  }
+
   var nom = form.querySelector('#field-nom').value.trim();
   var email = form.querySelector('#field-email').value.trim();
   var telephone = form.querySelector('#field-telephone').value.trim();
@@ -141,7 +179,8 @@ form.addEventListener('submit', function (e) {
     fonctionnalites: fonctionnalites.length > 0 ? fonctionnalites.join(', ') : 'Aucune',
     delai: delai,
     ambiance: ambiance,
-    rgpd: true
+    rgpd: true,
+    'cf-turnstile-response': turnstileToken
   };
 
   submitBtn.disabled = true;
@@ -157,13 +196,16 @@ form.addEventListener('submit', function (e) {
     return response.json().then(function (json) {
       if (response.ok && json.success) {
         setFormState('success');
+        turnstileToken = '';
       } else {
         setFormState('error', json.error || 'Une erreur est survenue.');
+        if (typeof turnstile !== 'undefined') { turnstile.reset(); turnstileToken = ''; }
       }
     });
   })
   .catch(function () {
     setFormState('error', 'Impossible de contacter le serveur.');
+    if (typeof turnstile !== 'undefined') { turnstile.reset(); turnstileToken = ''; }
   });
 });
 

@@ -25,6 +25,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="../style.css">
   <link rel="icon" href="../favicon.ico">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <!-- Structured Data: BreadcrumbList -->
   <script type="application/ld+json">
   {
@@ -415,6 +416,9 @@
           <span>J'accepte que mes donn&eacute;es soient utilis&eacute;es pour traiter ma demande. Consultez notre <a href="../mentions-legales/#donnees" target="_blank">politique de confidentialit&eacute;</a>.</span>
         </label>
       </div>
+
+      <!-- Cloudflare Turnstile antibot -->
+      <div id="turnstile-container" style="margin-bottom: 1rem;"></div>
 
       <!-- Submit -->
       <div class="form-group form-group--submit">
